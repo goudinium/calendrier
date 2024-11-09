@@ -1,13 +1,14 @@
 {% extends "layout.j2" %}
 {% block content %}
 <div class="calendar-body">
+    <h1>Ouvrez une case du calendrier de l'avent</h1>
     {% for day in range(24) %}
     {% if day % 4 == 0 %}
     <div class="row">
     {% endif %}
-        <div class="col-md-3">
+        <div class="col-6 col-sm-6 col-md-3">
             <a href="{{ url_for('day', day=day+1) }}">
-                <img src="{{ url_for('static', filename='images/cadeau_close'+(day+1)|string+'.png') }}" class="calendar-window" name="case1" data-popup="images/question.jpg" data-open="images/cadeau_open1.png" alt="Cadeau1">
+                <img src="{{ url_for('static', filename='images/cadeau_close'+(day+1)|string+'.png') }}" class="gift" name="case1" data-popup="images/question.jpg" data-open="images/cadeau_open1.png" alt="Cadeau1">
             </a>
         </div>
     {% if day % 4 == 3 %}
