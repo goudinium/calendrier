@@ -15,3 +15,12 @@ class User(db.Model, UserMixin):
 
     def __repr__(self) -> str:
         return f"User('{self.username}', '{self.first_name} {self.last_name}', '{self.is_admin}')"
+    
+class Question(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    day = db.Column(db.Integer, unique = True, nullable = False)
+    answer = db.Column(db.String(60), unique=False, nullable=False)
+    image = db.Column(db.String(20), unique=True, nullable=False)
+
+    def __repr__(self) -> str:
+        return f"Question('{self.day}', '{self.answer}')"
