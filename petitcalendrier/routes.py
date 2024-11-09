@@ -32,9 +32,9 @@ def login():
 
     return render_template("login.j2", form=form)
 
-@app.route("/admin", methods=['GET', 'POST'])
+@app.route("/register", methods=['GET', 'POST'])
 @login_required
-def admin():
+def register():
     if not current_user.is_admin:
         return redirect(url_for('home'))
     form = RegisterForm()
@@ -44,9 +44,17 @@ def admin():
         db.session.add(user)
         db.session.commit()
         flash("Utilisateur créé avec succès", "success")
-        return redirect(url_for("admin"))
+        return redirect(url_for("register"))
 
-    return render_template("admin.j2", form=form)
+    return render_template("register.j2", form=form)
+
+@app.route("/users")
+@login_required
+def users():
+    if not current_user.is_admin:
+        return redirect(url_for('home'))
+    users = User.query.all()
+    return render_template("users.j2", users=users)
 
 @app.route("/logout")
 @login_required

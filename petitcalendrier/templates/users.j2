@@ -1,0 +1,26 @@
+{% extends "layout.j2" %}
+{% block content %}
+<div class="container content-section d-flex align-items-center justify-content-center">
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nom d'utilisateur</th>
+      <th scope="col">Mdp chiffré </th>
+      <th scope="col">Administateur</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for user in users %}
+      <tr>
+        <th scope="col">{{user.id}}</th>
+        <th scope="col">{{user.username}}</th>
+        <th scope="col">{{user.password}}</th>
+        <th scope="col">{{user.is_admin}}</th>
+      </tr>
+    {% endfor %}
+  </tbody>
+  </table>
+</div>
+
+{% endblock content %}
