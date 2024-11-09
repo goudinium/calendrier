@@ -5,8 +5,10 @@
     {% if day % 4 == 0 %}
     <div class="row">
     {% endif %}
-        <div class="col">
-            <img src="{{ url_for('static', filename='images/cadeau_close'+(day+1)|string+'.png') }}" class="calendar-window" name="case1" data-popup="images/question.jpg" data-open="images/cadeau_open1.png" alt="Cadeau1">
+        <div class="col-md-3">
+            <a href="{{ url_for('day', day=day+1) }}">
+                <img src="{{ url_for('static', filename='images/cadeau_close'+(day+1)|string+'.png') }}" class="calendar-window" name="case1" data-popup="images/question.jpg" data-open="images/cadeau_open1.png" alt="Cadeau1">
+            </a>
         </div>
     {% if day % 4 == 3 %}
     </div>

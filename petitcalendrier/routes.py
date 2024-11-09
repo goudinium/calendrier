@@ -11,6 +11,11 @@ from petitcalendrier.models import User
 def home():
     return render_template("home.j2")
 
+@app.route("/day/<int:day>")
+@login_required
+def day(day):
+    return f"Hello this is day{day}" 
+
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
@@ -27,9 +32,9 @@ def login():
 
     return render_template("login.j2", form=form)
 
-@app.route("/register", methods=['GET', 'POST'])
+@app.route("/admin", methods=['GET', 'POST'])
 @login_required
-def register():
+def admin():
     if not current_user.is_admin:
         return redirect(url_for('home'))
     form = RegisterForm()
@@ -39,9 +44,9 @@ def register():
         db.session.add(user)
         db.session.commit()
         flash("Utilisateur créé avec succès", "success")
-        return redirect(url_for("register"))
+        return redirect(url_for("admin"))
 
-    return render_template("register.j2", form=form)
+    return render_template("admin.j2", form=form)
 
 @app.route("/logout")
 @login_required
