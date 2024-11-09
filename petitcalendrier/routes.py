@@ -9,7 +9,7 @@ from petitcalendrier.models import User
 @app.route("/")
 @login_required
 def home():
-    return render_template("home.j2")
+    return render_template("home.j2", first_name=current_user.first_name)
 
 @app.route("/day/<int:day>")
 @login_required
@@ -40,7 +40,7 @@ def register():
     form = RegisterForm()
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        user = User(username=form.username.data, password=hashed_password)
+        user = User(username=form.username.data, first_name=form.first_name.data, last_name=form.last_name.data, password=hashed_password)
         db.session.add(user)
         db.session.commit()
         flash("Utilisateur créé avec succès", "success")

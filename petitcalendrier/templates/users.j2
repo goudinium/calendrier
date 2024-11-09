@@ -6,6 +6,8 @@
     <tr>
       <th scope="col">#</th>
       <th scope="col">Nom d'utilisateur</th>
+      <th scope="col">Prénom</th>
+      <th scope="col">Nom de famille</th>
       <th scope="col">Mdp chiffré </th>
       <th scope="col">Administateur</th>
     </tr>
@@ -13,10 +15,12 @@
   <tbody>
     {% for user in users %}
       <tr>
-        <th scope="col">{{user.id}}</th>
-        <th scope="col">{{user.username}}</th>
-        <th scope="col">{{user.password}}</th>
-        <th scope="col">{{user.is_admin}}</th>
+        <th scope="row">{{user.id}}</th>
+        <td>{{user.username}}</th>
+        <td>{{user.first_name}}</th>
+        <td>{{user.last_name}}</th>
+        <td>{{user.password}}</th>
+        <td>{{user.is_admin}}</th>
       </tr>
     {% endfor %}
   </tbody>
