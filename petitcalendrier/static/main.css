@@ -1,10 +1,13 @@
+html,body {
+    height: 100vh;
+}
+
 .no-padding {
     padding: 0%;
 }
 
 .full-height {
     min-height: 100%;
-    height: 100vh;
 } 
 
 .login {
@@ -51,11 +54,12 @@ input[type="text"], input[type="password"] {
 /* CALENDRIER */
 
 .calendar-body {
+    min-height: 100vh;
     background-color: #f4e9db;
     font-family: Arial, sans-serif;
     text-align: center;
     margin: 0;
-    padding: 0;
+    padding-top: 10vh;
   }
   
 .calendar-body > h1 {
