@@ -1,4 +1,16 @@
 {% extends "layout.j2" %}
 {% block content %}
-<h1>Hello world</h1>
+<div class="calendar-body">
+    {% for day in range(24) %}
+    {% if day % 4 == 0 %}
+    <div class="row">
+    {% endif %}
+        <div class="col">
+            <img src="{{ url_for('static', filename='images/cadeau_close'+(day+1)|string+'.png') }}" class="calendar-window" name="case1" data-popup="images/question.jpg" data-open="images/cadeau_open1.png" alt="Cadeau1">
+        </div>
+    {% if day % 4 == 3 %}
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
 {% endblock %}

@@ -2,3 +2,4 @@ var/
 include/
 lib/
 bin/
+pyvenv.cfg

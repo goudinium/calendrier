@@ -1,5 +1,6 @@
 {% extends "layout.j2" %}
 {% block content %}
+    <div class="login-body">
     <form method="POST">
     {{ form.hidden_tag() }}
     <fieldset class="form-group">
@@ -43,4 +44,5 @@
     {{ form.submit(class="btn btn-outline-info") }}
     </fieldset>
     </form>
+    </div>
 {% endblock content %}
