@@ -2,5 +2,6 @@ var/
 include/
 lib/
 bin/
+Scripts/
 __pycache__/
 pyvenv.cfg
