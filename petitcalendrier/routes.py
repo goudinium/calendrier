@@ -1,9 +1,10 @@
+from datetime import date
 from flask import render_template, redirect, url_for, flash, request, abort
 from flask_login import login_user, current_user, logout_user, login_required
 
 
 from petitcalendrier import app, bcrypt, db 
-from petitcalendrier.forms import LoginForm, RegisterForm, NewQuestionForm
+from petitcalendrier.forms import LoginForm, RegisterForm, NewQuestionForm, AnswerForm
 from petitcalendrier.models import User
 
 @app.route("/")
@@ -11,10 +12,20 @@ from petitcalendrier.models import User
 def home():
     return render_template("home.j2", first_name=current_user.first_name)
 
-@app.route("/day/<int:day>")
+@app.route("/day/<int:day>", methods=['GET', 'POST'])
 @login_required
 def day(day):
-    return f"Hello this is day{day}" 
+    if day <1 or day >24: 
+        abort(404)
+    form = AnswerForm()
+    today = date.today()
+    challenge = url_for('static', filename='images/cases/singe.png')
+    if day == today.day: 
+        return render_template("gift.j2", form=form, challenge = challenge)
+    if day < today.day: 
+        return render_template("gift.j2", form=form, challenge = challenge)
+    if day > today.day: 
+        return redirect(url_for('home'))
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():

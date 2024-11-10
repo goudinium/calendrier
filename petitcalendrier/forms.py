@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed, FileRequired
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, IntegerField, SelectField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, IntegerField, SelectField, RadioField
 from wtforms.validators import DataRequired, ValidationError, NumberRange
 
 from petitcalendrier.models import User, Question
@@ -10,6 +10,11 @@ class LoginForm(FlaskForm):
     password = PasswordField('Mot de passe', validators=[DataRequired()])
     remember = BooleanField('Se souvenir de moi?')
     submit = SubmitField('Connexion')
+
+
+class AnswerForm(FlaskForm):
+    answer = RadioField("Quelle personne se cache derrière cette image?", choices=[('Tiphaine', 'Tiphaine'), ('Francois', 'François')])
+    submit = SubmitField("Valider")
 
 class RegisterForm(FlaskForm):
     username = StringField("Nom d'utilisateur", validators=[DataRequired()])
