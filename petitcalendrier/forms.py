@@ -11,9 +11,8 @@ class LoginForm(FlaskForm):
     remember = BooleanField('Se souvenir de moi?')
     submit = SubmitField('Connexion')
 
-
 class AnswerForm(FlaskForm):
-    answer = SelectField("🙍 Quelle personne se cache derrière cette image?", choices=[
+    answer_character = SelectField("🙍 Quelle personne se cache derrière cette image?", choices=[
         ('Agathe', 'Agathe'), ('Alexandra', 'Alexandra'), ('Aziliz', 'Aziliz'),
         ('Béatrice', 'Béatrice'), ('Céline', 'Céline'), ('Clotilde', 'Clotilde'),
         ('Evan', 'Evan'), ('Galatée', 'Galatée'), ('Jacques', 'Jacques'), 
@@ -22,12 +21,12 @@ class AnswerForm(FlaskForm):
         ('Loren', 'Loren'), ('Oriane', 'Oriane'), ('Papy', 'Papy'), 
         ('Quentin', 'Quentin'), ('Soraya', 'Soraya'), ('Stéphane', 'Stéphane'), 
         ('Théo', 'Théo'), ('Tiphaine', 'Tiphaine'), ('Tristan', 'Tristan'), 
-        ('Valérie', 'Valérie')])
-    answer_time = StringField("📅 Quel est le moment caché?")
-    answer_place = StringField("🌍 Quel est le lieu caché?")
-    answer_color = StringField("🎨 Quelle est la couleur cachée?")
-    answer_sound = StringField("🔊 Quel est le bruit caché?")
-    answer_object = StringField("💎Quel est l'objet?")
+        ('Valérie', 'Valérie')], validators=[DataRequired()])
+    answer_time = StringField("📅 Quel est le moment caché?", validators=[DataRequired()])
+    answer_place = StringField("🌍 Quel est le lieu caché?", validators=[DataRequired()])
+    answer_color = StringField("🎨 Quelle est la couleur cachée?", validators=[DataRequired()])
+    answer_sound = StringField("🔊 Quel est le bruit caché?", validators=[DataRequired()])
+    answer_object = StringField("💎Quel est l'objet?", validators=[DataRequired()])
     submit = SubmitField("Valider")
 
 class RegisterForm(FlaskForm):

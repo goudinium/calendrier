@@ -4,36 +4,47 @@
 <div class="container mt-5">
     <div class="row justify-content-center align-items-center">
     <h3 style="text-align: center;">Jour {{ day }}</h3>
-        <div class="col-12 col-md-6 col-lg-4 mb-4 text-center">
+        <div class="col-12 col-md-6 col-lg-4 text-center">
             <img src="{{ challenge }}" class="img-fluid rounded shadow" alt="Challenge Image" />
         </div>
-        {% if show_summarize %}
+        {% if answer %}
         <div class="col-12 col-md-6 col-lg-8">
             <div class="card shadow-sm p-4 mb-4 border-0">
                 <h4 class="card-title mb-4 text-primary">Réponse enregistrée</h4>
-                <p><strong>🙍 Personne :</strong> {{ form.answer.data }}</p>
-                <p><strong>📅 Période :</strong> {{ form.answer_time.data }}</p>
-                <p><strong>🌍 Lieu :</strong> {{ form.answer_place.data }}</p>
-                <p><strong>🔊 Bruit :</strong> {{ form.answer_sound.data }}</p>
-                <p><strong>💎 Objet vintage :</strong> {{ form.answer_object.data }}</p>
-                <p><strong>🎨 Couleur :</strong> {{ form.answer_color.data }}</p>
+                <p><strong>🙍 Personne :</strong> {{ answer.answer_character }}</p>
+                <p><strong>📅 Période :</strong> {{ answer.answer_time }}</p>
+                <p><strong>🌍 Lieu :</strong> {{ answer.answer_place }}</p>
+                <p><strong>🔊 Bruit :</strong> {{ answer.answer_sound }}</p>
+                <p><strong>💎 Objet vintage :</strong> {{ answer.answer_object }}</p>
+                <p><strong>🎨 Couleur :</strong> {{ answer.answer_color }}</p>
             </div>
+        </div>
+        {% elif expired %}
+        <div class="col-12 col-md-6 col-lg-8">
+            <div class="card shadow-sm p-4 mb-4 border-0">
+                <h4 class="card-title mb-4 text-primary">😢 Pas de réponse enregistrée 😢</h4>
+                <p>Nous n'avons pas reçu de réponse de ta part pour ce jour-ci...
+                   Alors nous on se casse la tête à te faire un calendrier de l'avent et c'est comme ça que tu nous remercies ??
+                   Est-ce que tu sais au moins combien de lignes de code on a écrit nous en comparaison??</p>
+                <p><strong>Tiphaine et François</strong></p>
+            </div>
+        </div>
         {% else %}  
         <h4 class="card-title mb-4 text-primary">Soumettre une réponse</h4>
                 <form method="POST" class="form-horizontal">
                     {{ form.hidden_tag() }}
 
                     <div class="form-group mb-4">
-                        {{ form.answer.label(class="form-control-label text-secondary") }}
-                        {% if form.answer.errors %}
-                            {{ form.answer(class="form-control is-invalid") }}
+                        {{ form.answer_character.label(class="form-control-label text-secondary") }}
+                        {% if form.answer_character.errors %}
+                            {{ form.answer_character(class="form-control is-invalid") }}
                             <div class="invalid-feedback">
-                                {% for error in form.answer.errors %}
+                                {% for error in form.answer_character.errors %}
                                     <span>{{ error }}</span>
                                 {% endfor %}
                             </div>
                         {% else %}
-                            {{ form.answer(class="form-control form-control-lg border-primary") }}
+                            {{ form.answer_character(class="form-control form-control-lg border-primary") }}
                         {% endif %}
                     </div>
 
