@@ -1,0 +1,11 @@
+{% extends "layout.j2" %}
+{% include "gift.j2" with context %}
+
+{% block content %}
+    <div class="content-section d-flex align-items-center justify-content-center">
+    <img src="{{challenge}}" />
+            <h3>Réponse enregistrée : {{ form.answer.data }}</h3>
+            <h3>Réponse enregistrée : {{ form.answer_time.data }}{{ form.answer_color.data }}{{ form.answer_sound.data }}{{ form.answer_place.data }}{{ form.answer_object.data }}</h3>
+
+    </div>
+{% endblock content %}

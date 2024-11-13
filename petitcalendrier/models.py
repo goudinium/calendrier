@@ -20,6 +20,11 @@ class Question(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     day = db.Column(db.Integer, unique = True, nullable = False)
     answer = db.Column(db.String(60), unique=False, nullable=False)
+    answer_time = db.Column(db.String(60), unique=False, nullable=False)
+    answer_object = db.Column(db.String(60), unique=False, nullable=False)
+    answer_place = db.Column(db.String(60), unique=False, nullable=False)
+    answer_sound = db.Column(db.String(60), unique=False, nullable=False)
+    answer_color = db.Column(db.String(60), unique=False, nullable=False)
     image = db.Column(db.String(20), unique=True, nullable=False)
 
     def __repr__(self) -> str:

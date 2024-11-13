@@ -21,11 +21,18 @@ def day(day):
     today = date.today()
     challenge = url_for('static', filename='images/cases/singe.png')
     if day == today.day: 
-        return render_template("gift.j2", form=form, challenge = challenge)
-    if day < today.day: 
-        return render_template("gift.j2", form=form, challenge = challenge)
-    if day > today.day: 
-        return redirect(url_for('home'))
+        show_summarize=False
+        if form.validate_on_submit():
+            show_summarize=True
+    elif day < today.day: 
+        show_summarize=True
+    elif day > today.day: 
+        return redirect(url_for('home'))    
+    return render_template("gift.j2", day=day, form=form, challenge=challenge, show_summarize=show_summarize)
+
+
+
+
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
