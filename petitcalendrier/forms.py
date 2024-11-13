@@ -13,7 +13,21 @@ class LoginForm(FlaskForm):
 
 
 class AnswerForm(FlaskForm):
-    answer = RadioField("Quelle personne se cache derrière cette image?", choices=[('Tiphaine', 'Tiphaine'), ('Francois', 'François')])
+    answer = SelectField("🙍 Quelle personne se cache derrière cette image?", choices=[
+        ('Agathe', 'Agathe'), ('Alexandra', 'Alexandra'), ('Aziliz', 'Aziliz'),
+        ('Béatrice', 'Béatrice'), ('Céline', 'Céline'), ('Clotilde', 'Clotilde'),
+        ('Evan', 'Evan'), ('Galatée', 'Galatée'), ('Jacques', 'Jacques'), 
+        ('Jean-Louis', 'Jean-Louis'), ('Julie', 'Julie'), ('Julien', 'Julien'),
+        ('Laurence', 'Laurence'), ('Lenaïc', 'Lenaïc'), ('Loïc', 'Loïc'),
+        ('Loren', 'Loren'), ('Oriane', 'Oriane'), ('Papy', 'Papy'), 
+        ('Quentin', 'Quentin'), ('Soraya', 'Soraya'), ('Stéphane', 'Stéphane'), 
+        ('Théo', 'Théo'), ('Tiphaine', 'Tiphaine'), ('Tristan', 'Tristan'), 
+        ('Valérie', 'Valérie')])
+    answer_time = StringField("📅 Quel est le moment caché?")
+    answer_place = StringField("🌍 Quel est le lieu caché?")
+    answer_color = StringField("🎨 Quelle est la couleur cachée?")
+    answer_sound = StringField("🔊 Quel est le bruit caché?")
+    answer_object = StringField("💎Quel est l'objet?")
     submit = SubmitField("Valider")
 
 class RegisterForm(FlaskForm):

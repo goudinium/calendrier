@@ -1,29 +1,75 @@
 {% extends "layout.j2" %}
-{% block content %}
-    <div class="content-section d-flex align-items-center justify-content-center">
-    <img src="{{challenge}}" />
 
-    <form class="col-lg-6 offset-lg-3" method="POST" >
-        <div class="row justify-content-center">
-            {{ form.hidden_tag() }}
-            <div class="form-group">
-                {{ form.answer.label(class="form-control-label") }}
-                {% if form.answer.errors %}
-                {{ form.answer(class="form-control form-control is-invalid") }}
-                <div class="invalid-feedback">
-                    {% for error in form.answer.errors %}
-                        <span>{{ error }}</span>
-                    {% endfor %}
-                </div>
-                {% else %}
-                {{ form.answer(class="form-control form-control-lg") }}
-                {% endif %}
-            </div>
-            <div class="form-group">
-            {{ form.submit(class="btn btn-light") }}
-            </div>
-            
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center align-items-center">
+    <h3 style="text-align: center;">Jour {{ day }}</h3>
+        <div class="col-12 col-md-6 col-lg-4 mb-4 text-center">
+            <img src="{{ challenge }}" class="img-fluid rounded shadow" alt="Challenge Image" />
         </div>
-    </form>
+        {% if show_summarize %}
+        <div class="col-12 col-md-6 col-lg-8">
+            <div class="card shadow-sm p-4 mb-4 border-0">
+                <h4 class="card-title mb-4 text-primary">Réponse enregistrée</h4>
+                <p><strong>🙍 Personne :</strong> {{ form.answer.data }}</p>
+                <p><strong>📅 Période :</strong> {{ form.answer_time.data }}</p>
+                <p><strong>🌍 Lieu :</strong> {{ form.answer_place.data }}</p>
+                <p><strong>🔊 Bruit :</strong> {{ form.answer_sound.data }}</p>
+                <p><strong>💎 Objet vintage :</strong> {{ form.answer_object.data }}</p>
+                <p><strong>🎨 Couleur :</strong> {{ form.answer_color.data }}</p>
+            </div>
+        {% else %}  
+        <h4 class="card-title mb-4 text-primary">Soumettre une réponse</h4>
+                <form method="POST" class="form-horizontal">
+                    {{ form.hidden_tag() }}
+
+                    <div class="form-group mb-4">
+                        {{ form.answer.label(class="form-control-label text-secondary") }}
+                        {% if form.answer.errors %}
+                            {{ form.answer(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.answer.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.answer(class="form-control form-control-lg border-primary") }}
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group mb-4">
+                        {{ form.answer_object.label(class="form-control-label text-secondary") }}
+                        {{ form.answer_object(class="form-control form-control-lg border-primary") }}
+                    </div>
+
+                    <div class="form-group mb-4">
+                        {{ form.answer_place.label(class="form-control-label text-secondary") }}
+                        {{ form.answer_place(class="form-control form-control-lg border-primary") }}
+                    </div>
+
+                    <div class="form-group mb-4">
+                        {{ form.answer_time.label(class="form-control-label text-secondary") }}
+                        {{ form.answer_time(class="form-control form-control-lg border-primary") }}
+                    </div>
+
+                    <div class="form-group mb-4">
+                        {{ form.answer_color.label(class="form-control-label text-secondary") }}
+                        {{ form.answer_color(class="form-control form-control-lg border-primary") }}
+                    </div>
+
+                    <div class="form-group mb-4">
+                        {{ form.answer_sound.label(class="form-control-label text-secondary") }}
+                        {{ form.answer_sound(class="form-control form-control-lg border-primary") }}
+                    </div>
+
+                    <div class="form-group text-center">
+                        {{ form.submit(class="btn btn-primary btn-lg px-5") }}
+                    </div>
+        {% endif %}
+
+                </form>
+            </div>
+        </div>
     </div>
+</div>
 {% endblock content %}
