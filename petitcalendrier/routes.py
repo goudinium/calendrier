@@ -17,7 +17,6 @@ def home():
 def day(day):
     if day < 1 or day > 24: 
         abort(404)
-    
     question = Question.query.filter_by(day=day).first_or_404()
     challenge = url_for('static', filename=f'images/cases/{question.image}')
     answer = Answer.query.filter_by(question=question, author=current_user).first()
