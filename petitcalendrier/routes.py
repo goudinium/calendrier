@@ -95,15 +95,6 @@ def update_user(user_id):
         form.last_name.data = user.last_name
     return render_template("register.j2", title=f"Modifier l'utilisateur {user.username}", form=form)
 
-@app.route("/questions/new", methods=['GET', 'POST'])
-@login_required
-def new_question():
-    if not current_user.is_admin:
-        abort(403)
-    form = NewQuestionForm()
-    if form.validate_on_submit():
-        pass 
-    return render_template("question_add.j2", form=form)
 
 @app.route("/users")
 @login_required
