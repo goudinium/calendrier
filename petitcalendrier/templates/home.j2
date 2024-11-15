@@ -9,11 +9,11 @@
     <div class="row">
     {% endif %}
         <div class="col-6 col-sm-4 col-md-2">
-            <a href="{{ url_for('day', day=day+1) }}">
+            <a href="{{ url_for('day', day=day) }}">
                 {% if day in open_gifts %} 
-                <img src="{{ url_for('static', filename='images/gifts/open/cadeau_open'+(day+1)|string+'.png') }}" class="gift" name="case1" data-popup="images/question.jpg" data-open="images/cadeau_open1.png" alt="Cadeau1">
+                <img src="{{ url_for('static', filename='images/gifts/open/cadeau_open'+(day)|string+'.png') }}" class="gift" name="case1" data-popup="images/question.jpg" data-open="images/cadeau_open1.png" alt="Cadeau1">
                 {% else %}
-                <img src="{{ url_for('static', filename='images/gifts/closed/cadeau_close'+(day+1)|string+'.png') }}" class="gift" name="case1" data-popup="images/question.jpg" data-open="images/cadeau_open1.png" alt="Cadeau1">
+                <img src="{{ url_for('static', filename='images/gifts/closed/cadeau_close'+(day)|string+'.png') }}" class="gift" name="case1" data-popup="images/question.jpg" data-open="images/cadeau_open1.png" alt="Cadeau1">
                 {% endif %}
             </a>
         </div>

@@ -10,7 +10,7 @@ from petitcalendrier.models import User, Answer, Question
 @login_required
 def home():
     today = date.today()
-    days = [13, 9, 10, 7, 21, 17, 20, 22, 15, 12, 4, 16, 2, 0, 8, 5, 6, 23, 11, 18, 14, 19, 1, 3]
+    days = [14, 10, 11, 8, 22, 18, 21, 23, 16, 13, 5, 17, 3, 1, 9, 6, 7, 24, 12, 19, 15, 20, 2, 4]
     open_gifts = {day for day in range(1, today.day)}
     todays_question = Question.query.filter_by(day=today.day).first()
     if todays_question:
