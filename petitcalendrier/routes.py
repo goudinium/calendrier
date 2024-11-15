@@ -3,14 +3,21 @@ from flask import render_template, redirect, url_for, flash, request, abort
 from flask_login import login_user, current_user, logout_user, login_required
 
 from petitcalendrier import app, bcrypt, db 
-from petitcalendrier.forms import LoginForm, RegisterForm, NewQuestionForm, AnswerForm
+from petitcalendrier.forms import LoginForm, RegisterForm, AnswerForm
 from petitcalendrier.models import User, Answer, Question
 
 @app.route("/")
 @login_required
 def home():
+    today = date.today()
     days = [13, 9, 10, 7, 21, 17, 20, 22, 15, 12, 4, 16, 2, 0, 8, 5, 6, 23, 11, 18, 14, 19, 1, 3]
-    return render_template("home.j2", first_name=current_user.first_name, days=days)
+    open_gifts = {day for day in range(1, today.day)}
+    todays_question = Question.query.filter_by(day=today.day).first()
+    if todays_question:
+        answer = Answer.query.filter_by(question=todays_question, author=current_user).first()
+        if answer:
+            open_gifts.add(today.day)
+    return render_template("home.j2", first_name=current_user.first_name, days=days, open_gifts=open_gifts)
 
 @app.route("/day/<int:day>", methods=['GET', 'POST'])
 @login_required
