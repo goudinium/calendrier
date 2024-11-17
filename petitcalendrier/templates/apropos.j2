@@ -1,0 +1,31 @@
+{% extends "layout.j2" %}
+
+{% block content %}
+<div class="container my-5">
+  <h1 class="text-center mb-4">À propos de nous</h1>
+
+  <div class="row align-items-center mb-5">
+    <div class="col-md-6">
+      <img src="{{ url_for('static', filename='images/cases/singe.png') }}" class="img-fluid rounded-circle about-img">
+    </div>
+    <div class="col-md-6">
+      <h3>Fanfan, le codeur fou</h3>
+      <p>
+      Ca c'est fanfan, mon copain trop fort qui code
+      </p>
+    </div>
+  </div>
+
+  <div class="row align-items-center mb-5">
+    <div class="col-md-6 order-md-2">
+      <img src="{{ url_for('static', filename='images/cases/singe.png') }}" class="img-fluid rounded-circle about-img">
+    </div>
+    <div class="col-md-6">
+      <h3>Tifun</h3>
+      <p>
+      Coucou c moi 
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock %}

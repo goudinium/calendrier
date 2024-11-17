@@ -10,12 +10,14 @@ html,body {
     min-height: 100%;
 } 
 
+
+
 .login {
     background-color: #f8f8f8; 
     font-family: 'Arial', sans-serif;
     color: #333;
     height: 100vh;
-    background-image: url('images/image_accueil.gif'); /* Arrière-plan GIF de Noël */
+    background-image: url('images/fond.jpg'); /* Arrière-plan GIF de Noël */
     background-size: cover;
     background-position: center;
 }
@@ -181,5 +183,10 @@ input[type="text"], input[type="password"] {
 }
 
   
+.about-img {
+  width: 120px;  /* Taille de l'image */
+  height: 120px; /* Taille de l'image */
+  object-fit: cover; /* Pour s'assurer que l'image est bien recadrée en forme ronde */
+}
   
   

@@ -118,3 +118,12 @@ def users():
 def logout():
     logout_user()
     return redirect(url_for('login'))
+
+
+@app.route("/score")
+def score():
+    return render_template("score.j2")
+
+@app.route("/apropos")
+def apropos():
+    return render_template("apropos.j2")
