@@ -3,14 +3,21 @@ from flask import render_template, redirect, url_for, flash, request, abort
 from flask_login import login_user, current_user, logout_user, login_required
 
 from petitcalendrier import app, bcrypt, db 
-from petitcalendrier.forms import LoginForm, RegisterForm, NewQuestionForm, AnswerForm
+from petitcalendrier.forms import LoginForm, RegisterForm, AnswerForm
 from petitcalendrier.models import User, Answer, Question
 
 @app.route("/")
 @login_required
 def home():
-    days = [13, 9, 10, 7, 21, 17, 20, 22, 15, 12, 4, 16, 2, 0, 8, 5, 6, 23, 11, 18, 14, 19, 1, 3]
-    return render_template("home.j2", first_name=current_user.first_name, days=days)
+    today = date.today()
+    days = [14, 10, 11, 8, 22, 18, 21, 23, 16, 13, 5, 17, 3, 1, 9, 6, 7, 24, 12, 19, 15, 20, 2, 4]
+    open_gifts = {day for day in range(1, today.day)}
+    todays_question = Question.query.filter_by(day=today.day).first()
+    if todays_question:
+        answer = Answer.query.filter_by(question=todays_question, author=current_user).first()
+        if answer:
+            open_gifts.add(today.day)
+    return render_template("home.j2", first_name=current_user.first_name, days=days, open_gifts=open_gifts)
 
 @app.route("/day/<int:day>", methods=['GET', 'POST'])
 @login_required
@@ -95,15 +102,6 @@ def update_user(user_id):
         form.last_name.data = user.last_name
     return render_template("register.j2", title=f"Modifier l'utilisateur {user.username}", form=form)
 
-@app.route("/questions/new", methods=['GET', 'POST'])
-@login_required
-def new_question():
-    if not current_user.is_admin:
-        abort(403)
-    form = NewQuestionForm()
-    if form.validate_on_submit():
-        pass 
-    return render_template("question_add.j2", form=form)
 
 @app.route("/users")
 @login_required
