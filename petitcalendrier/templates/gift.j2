@@ -1,9 +1,10 @@
-{% extends "layout.j2" %}
+<body style="background-color: f4e9db;">
 
+{% extends "layout.j2" %}
 {% block content %}
 <div class="container mt-5">
     <div class="row justify-content-center align-items-center">
-    <h3 style="text-align: center;">Jour {{ day }}</h3>
+      <h1 class="text-center mb-5"> Jour {{ day }} 🎁</h1>
     <div class="col-12 col-md-6 col-lg-4 text-center">
         <img src="{{ challenge }}" class="img-fluid rounded shadow" alt="Challenge Image" />
     </div>
@@ -12,7 +13,7 @@
         <div class="card shadow-sm p-4 mb-4 border-0">
             <h4 class="card-title mb-4 text-primary">Réponse enregistrée</h4>
             <p><strong>🙍 Personne :</strong> {{ answer.answer_character }}</p>
-            <p><strong>📅 Période :</strong> {{ answer.answer_time }}</p>
+            <p><strong>📅 Moment :</strong> {{ answer.answer_time }}</p>
             <p><strong>🌍 Lieu :</strong> {{ answer.answer_place }}</p>
             <p><strong>🔊 Bruit :</strong> {{ answer.answer_sound }}</p>
             <p><strong>💎 Objet vintage :</strong> {{ answer.answer_object }}</p>
@@ -126,3 +127,4 @@
     </div>
 </div>
 {% endblock content %}
+</body>
