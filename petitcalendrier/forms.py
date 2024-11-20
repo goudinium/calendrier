@@ -21,7 +21,7 @@ class AnswerForm(FlaskForm):
         ('Loren', 'Loren'), ('Oriane', 'Oriane'), ('Papy', 'Papy'), 
         ('Quentin', 'Quentin'), ('Soraya', 'Soraya'), ('Stéphane', 'Stéphane'), 
         ('Théo', 'Théo'), ('Tiphaine', 'Tiphaine'), ('Tristan', 'Tristan'), 
-        ('Valérie', 'Valérie')], validators=[DataRequired()])
+        ('Valérie', 'Valérie')], validators=[DataRequired(True)])
     answer_time = StringField("📅 Quel est le moment caché?", validators=[DataRequired()])
     answer_place = StringField("🌍 Quel est le lieu caché?", validators=[DataRequired()])
     answer_color = StringField("🎨 Quelle est la couleur cachée?", validators=[DataRequired()])

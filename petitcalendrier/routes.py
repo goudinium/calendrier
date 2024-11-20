@@ -13,15 +13,17 @@ def home():
     days = [14, 10, 11, 8, 22, 18, 21, 23, 16, 13, 5, 17, 3, 1, 9, 6, 7, 24, 12, 19, 15, 20, 2, 4]
     open_gifts = {day for day in range(1, today.day)}
     todays_question = Question.query.filter_by(day=today.day).first()
+    score = current_user.score
     if todays_question:
         answer = Answer.query.filter_by(question=todays_question, author=current_user).first()
         if answer:
             open_gifts.add(today.day)
-    return render_template("home.j2", first_name=current_user.first_name, days=days, open_gifts=open_gifts)
+    return render_template("home.j2", first_name=current_user.first_name, days=days, open_gifts=open_gifts, score=score)
 
 @app.route("/day/<int:day>", methods=['GET', 'POST'])
 @login_required
 def day(day):
+    score=current_user.score
     if day < 1 or day > 24: 
         abort(404)
     question = Question.query.filter_by(day=day).first_or_404()
@@ -35,12 +37,20 @@ def day(day):
             db.session.add(answer)
             db.session.commit()
             flash(f"Merci d'avoir répondu à la question du jour", "success")
-        return render_template("gift.j2", day=day, form=form, challenge=challenge, answer=answer, expired=False)
+            if (answer.answer_character == question.answer): 
+                score+=20; 
+            else:
+                score +=1
+            current_user.score = score
+            db.session.commit()
+            return render_template("gift.j2", day=day, challenge=challenge, answer=answer, question=question, expired=True, score=score)
+        return render_template("gift.j2", day=day, form=form, challenge=challenge, answer=answer, question=question, expired=False, score=score)
     elif day < today.day: 
-        return render_template("gift.j2", day=day, challenge=challenge, answer=answer, expired=True)
+        return render_template("gift.j2", day=day, challenge=challenge, answer=answer, question=question, expired=True, score=score)
     elif day > today.day: 
-        return redirect(url_for('home'))    
-    
+        return redirect(url_for('home'))
+        
+
 def create_answer(form, question, user):
     character = form.answer_character.data
     time = form.answer_time.data
@@ -119,8 +129,11 @@ def logout():
 
 
 @app.route("/score")
+@login_required
 def score():
-    return render_template("score.j2")
+    users = User.query.order_by(User.score.desc()).all()  
+    return render_template("score.j2", users=users)
+
 
 @app.route("/apropos")
 def apropos():

@@ -12,7 +12,11 @@ class User(db.Model, UserMixin):
     last_name = db.Column(db.String(60), unique=False, nullable=False) # todo: remove 
     password = db.Column(db.String(60), nullable=False)
     is_admin = db.Column(db.Boolean, unique=False, default=False)
+    score = db.Column(db.Integer, unique=False, default=0)
     answers = db.relationship('Answer', backref='author', lazy=True)
+
+
+
     
     def __repr__(self) -> str:
         return f"User('{self.username}', '{self.first_name} {self.last_name}', '{self.is_admin}')"

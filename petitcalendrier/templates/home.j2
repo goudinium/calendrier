@@ -4,6 +4,7 @@
     <div class="row">
         <h1 class="text-center mb-5">Bonjour {{ first_name }}, découvre la case du jour !</h1>
     </div>
+    <p>Ton score est de : {{ score }} </p>
     {% for day in days %}
     {% if loop.index0 % 6 == 0 %}
     <div class="row">

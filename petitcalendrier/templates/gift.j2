@@ -7,6 +7,8 @@
       <h1 class="text-center mb-5"> Jour {{ day }} 🎁</h1>
     <div class="col-12 col-md-6 col-lg-4 mb-5 text-center">
         <img src="{{ challenge }}" class="img-fluid rounded shadow" alt="Challenge Image" />
+    <text>{{ question.answer }}</text>
+    <text>{{ current_user.score }}</text>
     </div>
     {% if answer %}
     <div class="col-12 col-md-6 col-lg-8">
@@ -33,7 +35,6 @@
     {% else %}  
     <form method="POST" class="form-horizontal">
         {{ form.hidden_tag() }}
-
         <div class="form-group mb-4">
             {{ form.answer_character.label(class="form-control-label text-secondary") }}
             {% if form.answer_character.errors %}
@@ -48,6 +49,7 @@
             {% endif %}
         </div>
 
+        
         <div class="form-group mb-4">
             {{ form.answer_time.label(class="form-control-label text-secondary") }}
             {% if form.answer_time.errors %}
@@ -121,12 +123,9 @@
                 {{ form.answer_color(class="form-control form-control-lg border-primary w-100") }}
             {% endif %}
         </div>
-
-        
-
-       <div class="form-group text-center">
     {{ form.submit(class="btn btn-primary btn-lg px-5", onclick="return confirm('Tu es sur le point de valider. Aucune modification ne sera possible ensuite.')") }}
 </div>
+
 
     </form>
         {% endif %}
