@@ -7,15 +7,14 @@
       <h1 class="text-center mb-5"> Jour {{ day }} 🎁</h1>
     <div class="col-12 col-md-6 col-lg-4 mb-5 text-center">
         <img src="{{ challenge }}" class="img-fluid rounded shadow" alt="Challenge Image" />
-    <text>{{ question.answer }}</text>
-    <text>{{ current_user.score }}</text>
     </div>
     {% if answer %}
-        {% if day == today.day %}
+        {% if day != today.day %}
             <div class="col-12 col-md-6 col-lg-8">
                 <div class="card shadow-sm p-4 mb-4 border-0">
                     <h4 class="card-title mb-4 text-primary"> Ta réponse enregistrée </h4>
-                    <p><strong>🙍 Personne :</strong> {{ answer.answer_character }}</p> 
+                    <p><strong>🙍 Personne 1 :</strong> {{ answer.answer_character }}</p> 
+                    <p><strong>🙍 Personne 2 :</strong> {{ answer.answer_character2 }}</p> 
                     <p><strong>📅 Moment :</strong> {{ answer.answer_time }}</p> 
                     <p><strong>🌍 Lieu :</strong> {{ answer.answer_place }}</p>
                     <p><strong>🔊 Bruit :</strong> {{ answer.answer_sound }}</p>
@@ -25,24 +24,39 @@
             </div>
         {% else %}
             <div class="col-12 col-md-6 col-lg-8">
-                <div class="card shadow-sm p-4 mb-4 border-0">
-                    <h4 class="card-title mb-4 text-primary"> Ta réponse enregistrée </h4>
-                    <p>
-                        <strong>🙍 Personne : </strong>
-                            <span style="color: {% if question.answer == answer.answer_character %} green {% else %} red; text-decoration: line-through; {% endif %};">
-                                {{ answer.answer_character }}
-                            </span>
-                        <span style="color: green;">
-                              {{ question.answer }}
-                        </span>
-                    </p>
-                    <p><strong>📅 Moment :</strong> {{ answer.answer_time }}</p>
-                    <p><strong>🌍 Lieu :</strong> {{ answer.answer_place }}</p>
-                    <p><strong>🔊 Bruit :</strong> {{ answer.answer_sound }}</p>
-                    <p><strong>💎 Objet vintage :</strong> {{ answer.answer_object }}</p>
-                    <p><strong>🎨 Couleur :</strong> {{ answer.answer_color }}</p>
-                </div>
+    <div class="card shadow-sm p-4 mb-4 border-0">
+        <h4 class="card-title mb-4 text-primary">Ta réponse enregistrée</h4>
+        <div class="row">
+            <div class="col-6">
+                <p><strong>🙍 Personne 1: </strong>
+                    <span style="color: {% if question.answer == answer.answer_character %} green {% else %} red; text-decoration: line-through; {% endif %};">
+                        {{ answer.answer_character }}
+                    </span>
+                </p>
+                <p><strong>🙍 Personne 2: </strong>
+                    <span style="color: {% if question.answer == answer.answer_character2 %} green {% else %} red; text-decoration: line-through; {% endif %};">
+                        {{ answer.answer_character }}
+                    </span>
+                </p>
+                <p><strong>📅 Moment :</strong> {{ answer.answer_time }}</p>
+                <p><strong>🌍 Lieu :</strong> {{ answer.answer_place }}</p> 
+                <p><strong>🔊 Bruit :</strong> {{ answer.answer_sound }}</p> 
+                <p><strong>💎 Objet vintage :</strong> {{ answer.answer_object }}</p>
+                <p><strong>🎨 Couleur :</strong> {{ answer.answer_color }}</p>
             </div>
+            <div class="col-6"><span style="color: green;">
+                <p>{{ question.answer }}</p>
+                <p>{{ question.solution_time }}</p>
+                <p>{{ question.solution_place }}</p> 
+                <p>{{ question.solution_sound }}</p> 
+                <p>{{ question.solution_object }}</p>
+                <p>{{ question.solution_color }}</p>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
         {% endif %}
     {% elif expired %}
     <div class="col-12 col-md-6 col-lg-8">
@@ -54,21 +68,22 @@
             <p><strong>Tiphaine et François</strong></p>
         </div>
     </div>
+
     {% else %}  
-    <f method="POST" class="form-horizontal">
-    {{ form.answer_character.label(class="form-control-label text-secondary") }}
-    {% if form.answer_character.errors %}
-        {{ form.answer_character(class="form-control is-invalid") }}
-        <div class="invalid-feedback">
-            {% for error in form.answer_character.errors %}
-                <span>{{ error }}</span>
-            {% endfor %}
-        </div>
-    {% else %}
+<form method="POST" class="form-horizontal">
+        {{ form.hidden_tag() }}
+        <div class="form-group mb-4">
+            {{ form.answer_character.label(class="form-control-label text-secondary") }}
+            {% if form.answer_character.errors %}
+                {{ form.answer_character(class="form-control is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.answer_character.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
         <div class="input-group">
-            <!-- Ajout de l'option vide par défaut avec placeholder -->
             <select class="form-control form-control-lg border-primary w-100" name="{{ form.answer_character.name }}">
-                <!-- L'option vide sert de placeholder -->
                 <option value="" {% if not form.answer_character.data %}selected{% endif %} disabled selected>Sélectionne un prénom</option>
                 {% for value, label in form.answer_character.choices %}
                     <option value="{{ value }}" {% if form.answer_character.data == value %}selected{% endif %}>{{ label }}</option>
@@ -76,8 +91,7 @@
             </select>
         </div>
     {% endif %}
-</f
-
+        </div>
 
 
         
@@ -164,3 +178,4 @@
 </div>
 {% endblock content %}
 </body>
+   

@@ -26,6 +26,11 @@ class Question(db.Model):
     day = db.Column(db.Integer, unique = True, nullable = False)
     image = db.Column(db.String(20), unique=False, nullable=False)
     answer = db.Column(db.String(20), unique=False, nullable=False)
+    solution_time = db.Column(db.String(60), unique=False, nullable=False)
+    solution_object = db.Column(db.String(60), unique=False, nullable=False)
+    solution_place = db.Column(db.String(60), unique=False, nullable=False)
+    solution_sound = db.Column(db.String(60), unique=False, nullable=False)
+    solution_color = db.Column(db.String(60), unique=False, nullable=False)
     answers = db.relationship('Answer', backref='question', lazy=True)
 
     def __repr__(self) -> str:
@@ -34,6 +39,7 @@ class Question(db.Model):
 class Answer(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     answer_character = db.Column(db.String(20), unique=False, nullable=False)
+    answer_character2 = db.Column(db.String(20), unique=False, nullable=False)
     answer_time = db.Column(db.String(60), unique=False, nullable=False)
     answer_object = db.Column(db.String(60), unique=False, nullable=False)
     answer_place = db.Column(db.String(60), unique=False, nullable=False)

@@ -12,7 +12,7 @@ with app.app_context():
     db.session.commit()
 
     for i in range(1, 25):
-        question = Question(day=i, image="singe.png", answer="Tiphaine")
+        question = Question(day=i, image="singe.png", answer="Tiphaine", solution_time='mai', solution_place='brochant',
+                            solution_object='mp3', solution_sound='métro', solution_color="bleu")
         db.session.add(question)    
         db.session.commit()
-

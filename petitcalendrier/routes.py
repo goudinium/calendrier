@@ -36,9 +36,8 @@ def day(day):
             answer = create_answer(form, question, current_user)
             db.session.add(answer)
             db.session.commit()
-            flash(f"Merci d'avoir répondu à la question du jour", "success")
             if (answer.answer_character == question.answer): 
-                score+=20; 
+                score+=20 
             else:
                 score +=1
             current_user.score = score
