@@ -18,7 +18,7 @@ def home():
         answer = Answer.query.filter_by(question=todays_question, author=current_user).first()
         if answer:
             open_gifts.add(today.day)
-    return render_template("home.j2", first_name=current_user.first_name, days=days, open_gifts=open_gifts, score=score)
+    return render_template("home.j2", first_name=current_user.first_name, days=days, open_gifts=open_gifts, score=score, today=today)
 
 @app.route("/day/<int:day>", methods=['GET', 'POST'])
 @login_required
@@ -43,7 +43,7 @@ def day(day):
                 score +=1
             current_user.score = score
             db.session.commit()
-            return render_template("gift.j2", day=day, challenge=challenge, answer=answer, question=question, expired=True, score=score)
+            return render_template("gift.j2", day=day, challenge=challenge, answer=answer, question=question, expired=True, score=score, today=today)
         return render_template("gift.j2", day=day, form=form, challenge=challenge, answer=answer, question=question, expired=False, score=score)
     elif day < today.day: 
         return render_template("gift.j2", day=day, challenge=challenge, answer=answer, question=question, expired=True, score=score)
