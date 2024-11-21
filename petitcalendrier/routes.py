@@ -44,9 +44,9 @@ def day(day):
             current_user.score = score
             db.session.commit()
             return render_template("gift.j2", day=day, challenge=challenge, answer=answer, question=question, expired=True, score=score, today=today)
-        return render_template("gift.j2", day=day, form=form, challenge=challenge, answer=answer, question=question, expired=False, score=score)
+        return render_template("gift.j2", day=day, form=form, challenge=challenge, answer=answer, question=question, expired=False, score=score, today=today)
     elif day < today.day: 
-        return render_template("gift.j2", day=day, challenge=challenge, answer=answer, question=question, expired=True, score=score)
+        return render_template("gift.j2", day=day, challenge=challenge, answer=answer, question=question, expired=True, score=score, today=today)
     elif day > today.day: 
         return redirect(url_for('home'))
         
