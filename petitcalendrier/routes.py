@@ -2,22 +2,22 @@ from datetime import date
 from flask import render_template, redirect, url_for, flash, request, abort
 from flask_login import login_user, current_user, logout_user, login_required
 
-from petitcalendrier import app, bcrypt, db 
+from petitcalendrier import app, bcrypt, db, moch_day 
 from petitcalendrier.forms import LoginForm, RegisterForm, AnswerForm
 from petitcalendrier.models import User, Answer, Question
 
 @app.route("/")
 @login_required
 def home():
-    today = date.today()
+    today = get_todays_day()
     days = [14, 10, 11, 8, 22, 18, 21, 23, 16, 13, 5, 17, 3, 1, 9, 6, 7, 24, 12, 19, 15, 20, 2, 4]
-    open_gifts = {day for day in range(1, today.day)}
-    todays_question = Question.query.filter_by(day=today.day).first()
+    open_gifts = {day for day in range(1, today)}
+    todays_question = Question.query.filter_by(day=today).first()
     score = current_user.score
     if todays_question:
         answer = Answer.query.filter_by(question=todays_question, author=current_user).first()
         if answer:
-            open_gifts.add(today.day)
+            open_gifts.add(today)
     return render_template("home.j2", first_name=current_user.first_name, days=days, open_gifts=open_gifts, score=score, today=today)
 
 @app.route("/day/<int:day>", methods=['GET', 'POST'])
@@ -29,8 +29,8 @@ def day(day):
     question = Question.query.filter_by(day=day).first_or_404()
     challenge = url_for('static', filename=f'images/cases/{question.image}')
     answer = Answer.query.filter_by(question=question, author=current_user).first()
-    today = date.today()
-    if day == today.day: 
+    today = get_todays_day()
+    if day == today: 
         form = AnswerForm()
         if form.validate_on_submit():
             answer = create_answer(form, question, current_user)
@@ -44,9 +44,9 @@ def day(day):
             db.session.commit()
             return render_template("gift.j2", day=day, challenge=challenge, answer=answer, question=question, expired=True, score=score, today=today)
         return render_template("gift.j2", day=day, form=form, challenge=challenge, answer=answer, question=question, expired=False, score=score, today=today)
-    elif day < today.day: 
+    elif day < today: 
         return render_template("gift.j2", day=day, challenge=challenge, answer=answer, question=question, expired=True, score=score, today=today)
-    elif day > today.day: 
+    elif day > today: 
         return redirect(url_for('home'))
         
 
@@ -137,3 +137,6 @@ def score():
 @app.route("/apropos")
 def apropos():
     return render_template("apropos.j2")
+
+def get_todays_day():
+    return moch_day if app.debug else date.today().day 
