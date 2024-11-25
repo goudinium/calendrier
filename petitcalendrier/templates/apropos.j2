@@ -1,31 +1,88 @@
+<body style="background-color: #f4e9db;">
 {% extends "layout.j2" %}
 
 {% block content %}
-<div class="container my-5">
-  <h1 class="text-center mb-4">À propos de nous</h1>
-
-  <div class="row align-items-center mb-5">
-    <div class="col-md-6">
-      <img src="{{ url_for('static', filename='images/cases/singe.png') }}" class="img-fluid rounded-circle about-img">
+<div class="container py-5">
+  <h1 class="text-center mb-5">À propos 💬</h1>
+  <div class="mb-5">
+  <h2 class="text-center mb-2">Le concept</h2>
+    Vous avez rempli un formulaire en répondant aux questions suivantes selon vos goûts et expériences : </br>
+    <div class="text-center">
+    📅 Un moment </br>
+    🌍 Un lieu </br>
+    🔊 Un bruit </br>
+    💎 Un objet vintage </br>
+    🎨 Une couleur  </br>
+    <p>
     </div>
-    <div class="col-md-6">
-      <h3>Fanfan, le codeur fou</h3>
-      <p>
-      Ca c'est fanfan, mon copain trop fort qui code
-      </p>
-    </div>
+    <p></p>
+      À partir de ces informations, et avec l’aide de ChatGPT, une image a été créée pour vous représenter 
+      (ou du moins essayer de refléter un peu votre personnalité !).
+      Chaque jour, vous allez découvrir les images de chacun. <b>Le défi : deviner qui se cache derrière l'image 
+      et quels étaient les éléments associés !</b>
+    </p>
   </div>
 
-  <div class="row align-items-center mb-5">
-    <div class="col-md-6 order-md-2">
-      <img src="{{ url_for('static', filename='images/cases/singe.png') }}" class="img-fluid rounded-circle about-img">
+  <h2 class="text-center mb-2">L'équipe</h2>
+  <div class="row justify-content-center g-4">
+    <div class="col-12 col-sm-6 col-md-4 d-flex justify-content-center">
+      <div class="card shadow-sm p-4 border-0" style="max-width: 18rem;">
+        <div class="d-flex justify-content-center">
+          <img 
+            src="{{ url_for('static', filename='images/apropos/fanfan.jpg') }}" 
+            class="img-fluid rounded-circle about-img card-img-top" 
+            alt="Photo de Fanfan, développeur passionné" 
+            style="max-height: 180px; object-fit: cover;">
+        </div>
+        <div class="card-body text-center">
+          <h5 class="card-title">Fanfan, le codeur fou</h5>
+          <p class="card-text">
+            Il a essayé de trouver la meilleure solution pour éviter le saut dans l'étang : coder le calendrier de la belle-famille. Ça passe ou pas ? 
+            Sans lui, rien de tout ça n'aurait eu lieu et on serait encore en train de s'envoyer des mails… C'est vintage après tout !
+          </p>
+        </div>
+      </div>
     </div>
-    <div class="col-md-6">
-      <h3>Tifun</h3>
-      <p>
-      Coucou c moi 
-      </p>
+
+    <div class="col-12 col-sm-6 col-md-4 d-flex justify-content-center">
+      <div class="card shadow-sm p-4 border-0" style="max-width: 18rem;">
+        <div class="d-flex justify-content-center">
+          <img 
+            src="{{ url_for('static', filename='images/apropos/tifun.jpg') }}" 
+            class="img-fluid rounded-circle about-img card-img-top" 
+            alt="Photo de Tifun, rédactrice en chef du projet" 
+            style="max-height: 180px; object-fit: cover;">
+        </div>
+        <div class="card-body text-center">
+          <h5 class="card-title">Tifun, la rédactrice en chef</h5>
+          <p class="card-text">
+            Je suis ravie de cette version du calendrier ! Nous avons mis tout notre cœur dans ce projet, et j’espère qu’il vous plaira. P.S. : Je suis à la recherche d’un CDI, contactez-moi si besoin !
+          </p>
+        </div>
+      </div>
     </div>
+
+    <div class="col-12 col-sm-6 col-md-4 d-flex justify-content-center">
+      <div class="card shadow-sm p-4 border-0" style="max-width: 18rem;">
+        <div class="d-flex justify-content-center">
+          <img 
+            src="{{ url_for('static', filename='images/apropos/clem.jpg') }}" 
+            class="img-fluid rounded-circle about-img card-img-top" 
+            alt="Photo de Clem, passionnée de vintage et colocataire" 
+            style="max-height: 180px; object-fit: cover;">
+        </div>
+        <div class="card-body text-center">
+          <h5 class="card-title">Clemouche, l'amie du chat</h5>
+          <p class="card-text">
+            Elle connaît votre objet vintage favori, votre lieu préféré ou encore votre bruit fétiche par cœur ! Avant d'être celle qui m'a aidé pour écrire les prompts pour notre cher ami ChatGPT, c'est avant tout ma coloc !
+            N'hésitez pas à passer à Malakoff pour la rencontrer, elle aimerait bien savoir qui se cache derrière un rototo, une machine à laver ou encore un joli tricot !
+          </p>
+        </div>
+      </div>
+    </div>
+
+    
   </div>
 </div>
 {% endblock %}
+</body>

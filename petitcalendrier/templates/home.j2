@@ -2,21 +2,36 @@
 {% block content %}
 <div class="calendar-body full-height">
     <div class="row">
-        <h1>Bonjour {{ first_name }}, ouvre une case du calendrier!</h1>
+      <h1 class="text-center mb-5"> Bonjour {{ first_name }}, découvre la case du jour 🎁 </h1>
     </div>
+      <h3 style="color: #708b7e;">Ton score: {{ current_user.score }}</h3>
     {% for day in days %}
     {% if loop.index0 % 6 == 0 %}
     <div class="row">
     {% endif %}
         <div class="col-6 col-sm-4 col-md-2">
-            <a href="{{ url_for('day', day=day) }}">
-                {% if day in open_gifts %} 
-                <img src="{{ url_for('static', filename='images/gifts/open/cadeau_open'+(day)|string+'.png') }}" class="gift" name="case1" data-popup="images/question.jpg" data-open="images/cadeau_open1.png" alt="Cadeau1">
-                {% else %}
-                <img src="{{ url_for('static', filename='images/gifts/closed/cadeau_close'+(day)|string+'.png') }}" class="gift" name="case1" data-popup="images/question.jpg" data-open="images/cadeau_open1.png" alt="Cadeau1">
-                {% endif %}
-            </a>
-        </div>
+    <a href="{{ url_for('day', day=day) }}">
+        {% if day in open_gifts %}
+            {% if day == today.day %}
+                <img src="{{ url_for('static', filename='images/gifts/wait/cadeau_wait_' + day|string + '.png') }}" 
+                     class="gift" 
+                     name="case1" 
+                     alt="Cadeau en attente">
+            {% else %}
+                <img src="{{ url_for('static', filename='images/gifts/open/cadeau_open' + day|string + '.png') }}" 
+                     class="gift" 
+                     name="case1"  
+                     alt="Cadeau ouvert">
+            {% endif %}
+        {% else %}
+            <img src="{{ url_for('static', filename='images/gifts/closed/cadeau_close' + day|string + '.png') }}" 
+                 class="gift" 
+                 name="case1" 
+                 alt="Cadeau fermé">
+        {% endif %}
+    </a>
+</div>
+
     {% if loop.index0 % 6 == 5 %}
     </div>
     {% endif %}

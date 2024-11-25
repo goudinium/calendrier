@@ -20,13 +20,13 @@ class AnswerForm(FlaskForm):
         ('Laurence', 'Laurence'), ('Lenaïc', 'Lenaïc'), ('Loïc', 'Loïc'),
         ('Loren', 'Loren'), ('Oriane', 'Oriane'), ('Papy', 'Papy'), 
         ('Quentin', 'Quentin'), ('Soraya', 'Soraya'), ('Stéphane', 'Stéphane'), 
-        ('Théo', 'Théo'), ('Tiphaine', 'Tiphaine'), ('Tristan', 'Tristan'), 
-        ('Valérie', 'Valérie')], validators=[DataRequired()])
+        ('Théophile', 'Théophile'), ('Tiphaine', 'Tiphaine'), ('Tristan', 'Tristan'), 
+        ('Valérie', 'Valérie')], validators=[DataRequired(True)])
     answer_time = StringField("📅 Quel est le moment caché?", validators=[DataRequired()])
     answer_place = StringField("🌍 Quel est le lieu caché?", validators=[DataRequired()])
     answer_color = StringField("🎨 Quelle est la couleur cachée?", validators=[DataRequired()])
     answer_sound = StringField("🔊 Quel est le bruit caché?", validators=[DataRequired()])
-    answer_object = StringField("💎Quel est l'objet?", validators=[DataRequired()])
+    answer_object = StringField("💎Quel est l'objet vintage caché?", validators=[DataRequired()])
     submit = SubmitField("Valider")
 
 class RegisterForm(FlaskForm):

@@ -1,24 +1,63 @@
-{% extends "layout.j2" %}
+<body style="background-color: f4e9db;">
 
+{% extends "layout.j2" %}
 {% block content %}
 <div class="container mt-5">
     <div class="row justify-content-center align-items-center">
-    <h3 style="text-align: center;">Jour {{ day }}</h3>
-    <div class="col-12 col-md-6 col-lg-4 text-center">
+      <h1 class="text-center mb-5"> Jour {{ day }} 🎁</h1>
+    <div class="col-12 col-md-6 col-lg-4 mb-5 text-center">
         <img src="{{ challenge }}" class="img-fluid rounded shadow" alt="Challenge Image" />
     </div>
     {% if answer %}
-    <div class="col-12 col-md-6 col-lg-8">
-        <div class="card shadow-sm p-4 mb-4 border-0">
-            <h4 class="card-title mb-4 text-primary">Réponse enregistrée</h4>
-            <p><strong>🙍 Personne :</strong> {{ answer.answer_character }}</p>
-            <p><strong>📅 Période :</strong> {{ answer.answer_time }}</p>
-            <p><strong>🌍 Lieu :</strong> {{ answer.answer_place }}</p>
-            <p><strong>🔊 Bruit :</strong> {{ answer.answer_sound }}</p>
-            <p><strong>💎 Objet vintage :</strong> {{ answer.answer_object }}</p>
-            <p><strong>🎨 Couleur :</strong> {{ answer.answer_color }}</p>
+        {% if day != today.day %}
+            <div class="col-12 col-md-6 col-lg-8">
+                <div class="card shadow-sm p-4 mb-4 border-0">
+                    <h4 class="card-title mb-4 text-primary"> Ta réponse enregistrée </h4>
+                    <p><strong>🙍 Personne 1 :</strong> {{ answer.answer_character }}</p> 
+                    <p><strong>🙍 Personne 2 :</strong> {{ answer.answer_character2 }}</p> 
+                    <p><strong>📅 Moment :</strong> {{ answer.answer_time }}</p> 
+                    <p><strong>🌍 Lieu :</strong> {{ answer.answer_place }}</p>
+                    <p><strong>🔊 Bruit :</strong> {{ answer.answer_sound }}</p>
+                    <p><strong>💎 Objet vintage :</strong> {{ answer.answer_object }}</p>
+                    <p><strong>🎨 Couleur :</strong> {{ answer.answer_color }}</p>
+                </div>
+            </div>
+        {% else %}
+            <div class="col-12 col-md-6 col-lg-8">
+    <div class="card shadow-sm p-4 mb-4 border-0">
+        <h4 class="card-title mb-4 text-primary">Ta réponse enregistrée</h4>
+        <div class="row">
+            <div class="col-6">
+                <p><strong>🙍 Personne 1: </strong>
+                    <span style="color: {% if question.answer == answer.answer_character %} green {% else %} red; text-decoration: line-through; {% endif %};">
+                        {{ answer.answer_character }}
+                    </span>
+                </p>
+                <p><strong>🙍 Personne 2: </strong>
+                    <span style="color: {% if question.answer == answer.answer_character2 %} green {% else %} red; text-decoration: line-through; {% endif %};">
+                        {{ answer.answer_character }}
+                    </span>
+                </p>
+                <p><strong>📅 Moment :</strong> {{ answer.answer_time }}</p>
+                <p><strong>🌍 Lieu :</strong> {{ answer.answer_place }}</p> 
+                <p><strong>🔊 Bruit :</strong> {{ answer.answer_sound }}</p> 
+                <p><strong>💎 Objet vintage :</strong> {{ answer.answer_object }}</p>
+                <p><strong>🎨 Couleur :</strong> {{ answer.answer_color }}</p>
+            </div>
+            <div class="col-6"><span style="color: green;">
+                <p>{{ question.answer }}</p>
+                <p>{{ question.solution_time }}</p>
+                <p>{{ question.solution_place }}</p> 
+                <p>{{ question.solution_sound }}</p> 
+                <p>{{ question.solution_object }}</p>
+                <p>{{ question.solution_color }}</p>
+                </span>
+            </div>
         </div>
     </div>
+</div>
+
+        {% endif %}
     {% elif expired %}
     <div class="col-12 col-md-6 col-lg-8">
         <div class="card shadow-sm p-4 mb-4 border-0">
@@ -29,11 +68,10 @@
             <p><strong>Tiphaine et François</strong></p>
         </div>
     </div>
-    {% else %}  
-    <h4 class="card-title mb-4 text-primary">Soumettre une réponse</h4>
-    <form method="POST" class="form-horizontal">
-        {{ form.hidden_tag() }}
 
+    {% else %}  
+<form method="POST" class="form-horizontal">
+        {{ form.hidden_tag() }}
         <div class="form-group mb-4">
             {{ form.answer_character.label(class="form-control-label text-secondary") }}
             {% if form.answer_character.errors %}
@@ -44,21 +82,30 @@
                     {% endfor %}
                 </div>
             {% else %}
-                {{ form.answer_character(class="form-control form-control-lg border-primary w-100") }}
-            {% endif %}
+        <div class="input-group">
+            <select class="form-control form-control-lg border-primary w-100" name="{{ form.answer_character.name }}">
+                <option value="" {% if not form.answer_character.data %}selected{% endif %} disabled selected>Sélectionne un prénom</option>
+                {% for value, label in form.answer_character.choices %}
+                    <option value="{{ value }}" {% if form.answer_character.data == value %}selected{% endif %}>{{ label }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    {% endif %}
         </div>
 
+
+        
         <div class="form-group mb-4">
-            {{ form.answer_object.label(class="form-control-label text-secondary") }}
-            {% if form.answer_object.errors %}
-                {{ form.answer_object(class="form-control is-invalid") }}
+            {{ form.answer_time.label(class="form-control-label text-secondary") }}
+            {% if form.answer_time.errors %}
+                {{ form.answer_time(class="form-control is-invalid") }}
                 <div class="invalid-feedback">
-                    {% for error in form.answer_object.errors %}
+                    {% for error in form.answer_time.errors %}
                         <span>{{ error }}</span>
                     {% endfor %}
                 </div>
             {% else %}
-                {{ form.answer_object(class="form-control form-control-lg border-primary w-100") }}
+                {{ form.answer_time(class="form-control form-control-lg border-primary w-100") }}
             {% endif %}
         </div>
 
@@ -77,18 +124,36 @@
         </div>
 
         <div class="form-group mb-4">
-            {{ form.answer_time.label(class="form-control-label text-secondary") }}
-            {% if form.answer_time.errors %}
-                {{ form.answer_time(class="form-control is-invalid") }}
+            {{ form.answer_sound.label(class="form-control-label text-secondary") }}
+            {% if form.answer_sound.errors %}
+                {{ form.answer_sound(class="form-control is-invalid") }}
                 <div class="invalid-feedback">
-                    {% for error in form.answer_time.errors %}
+                    {% for error in form.answer_sound.errors %}
                         <span>{{ error }}</span>
                     {% endfor %}
                 </div>
             {% else %}
-                {{ form.answer_time(class="form-control form-control-lg border-primary w-100") }}
+                {{ form.answer_sound(class="form-control form-control-lg border-primary w-100") }}
             {% endif %}
         </div>
+
+
+        <div class="form-group mb-4">
+            {{ form.answer_object.label(class="form-control-label text-secondary") }}
+            {% if form.answer_object.errors %}
+                {{ form.answer_object(class="form-control is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.answer_object.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.answer_object(class="form-control form-control-lg border-primary w-100") }}
+            {% endif %}
+        </div>
+
+        
+        
 
         <div class="form-group mb-4">
             {{ form.answer_color.label(class="form-control-label text-secondary") }}
@@ -103,26 +168,14 @@
                 {{ form.answer_color(class="form-control form-control-lg border-primary w-100") }}
             {% endif %}
         </div>
+    {{ form.submit(class="btn btn-primary btn-lg px-5", onclick="return confirm('Tu es sur le point de valider. Aucune modification ne sera possible ensuite.')") }}
+</div>
 
-        <div class="form-group mb-4">
-            {{ form.answer_sound.label(class="form-control-label text-secondary") }}
-            {% if form.answer_sound.errors %}
-                {{ form.answer_sound(class="form-control is-invalid") }}
-                <div class="invalid-feedback">
-                    {% for error in form.answer_sound.errors %}
-                        <span>{{ error }}</span>
-                    {% endfor %}
-                </div>
-            {% else %}
-                {{ form.answer_sound(class="form-control form-control-lg border-primary w-100") }}
-            {% endif %}
-        </div>
 
-        <div class="form-group text-center">
-            {{ form.submit(class="btn btn-primary btn-lg px-5") }}
-        </div>
     </form>
         {% endif %}
     </div>
 </div>
 {% endblock content %}
+</body>
+   

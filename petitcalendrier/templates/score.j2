@@ -1,50 +1,60 @@
+<body style="background-color: #f4e9db;">
 {% extends "layout.j2" %}
-
 {% block content %}
-<div class="container mt-5">
-    <h1 class="text-center display-4 mb-5" style="color: #d35137;">Page des Scores 🏆</h1>
-    
+<div class="container py-5">
+  <h1 class="text-center mb-5"> Les scores 🏆</h1>
+  <div class="row justify-content-center mb-4">
     <div class="row justify-content-center mb-4">
-        <h3 class="text-center" style="color: #708b7e;">
-            Ton score : <span class="badge p-2 fs-4" style="background-color: #82c7f9; color: #ebcd6d;">1234</span>
-        </h3>
+    <div class="card p-4 shadow-sm text-center" style="max-width: 400px; border: 1px solid #ebcd6d; background-color: #fff;">
+      <h3 style="color: #708b7e;">Ton score: {{ current_user.score }}</h3>
+      <h5 class="mt-3" style="color: #d35137;">Ta position : {{ users.index(current_user) + 1 }}ème place</h5>
     </div>
+  </div>
+  </div>
 
-    <div class="row justify-content-center">
-        <h1 class="text-center mb-4" style="color: #ebcd6d;">Classement Général</h1>
+  <h1 class="text-center mb-4" style="color: #ebcd6d;">Classement Général</h1>
+  <div class="table-responsive">
+    <table class="table table-bordered text-center">
+      <thead style="background-color: #82c7f9; color: #f4e9db;">
+        <tr>
+          <th>Position</th>
+          <th>Utilisateur</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if users|length >= 1 %}
+        <tr style="background-color: #d35137; color: #f4e9db;">
+          <td>🥇 1ère place</td>
+          <td>{{ users[0].username }}</td>
+          <td>{{ users[0].score }} points</td>
+        </tr>
+        {% endif %}
+        {% if users|length >= 2 %}
+        <tr style="background-color: #82c7f9; color: #f4e9db;">
+          <td>🥈 2ème place</td>
+          <td>{{ users[1].username }}</td>
+          <td>{{ users[1].score }} points</td>
+        </tr>
+        {% endif %}
+        {% if users|length >= 3 %}
+        <tr style="background-color: #708b7e; color: #f4e9db;">
+          <td>🥉 3ème place</td>
+          <td>{{ users[2].username }}</td>
+          <td>{{ users[2].score }} points</td>
+        </tr>
+        {% endif %}
 
-        <!-- Podium for top 3 players -->
-        <div class="col-12 col-md-10 col-lg-8 d-flex justify-content-around mb-5">
-            <!-- 2nd Place - Left -->
-            <div class="card shadow-sm p-3 text-center" style="width: 30%; height: 200px; border: 3px solid #82c7f9;">
-                <h2>🥈 2ème place</h2>
-                <p style="color: #708b7e;">Nom Joueur - <span class="badge fs-5" style="background-color: #d35137; color: #ebcd6d;">1800 points</span></p>
-            </div>
-
-            <!-- 1st Place - Center -->
-            <div class="card shadow-sm p-4 text-center" style="width: 35%; height: 250px; border: 3px solid #d35137;">
-                <h1 class="display-4">🥇 1ère place</h1>
-                <p style="color: #708b7e;">Nom Joueur - <span class="badge fs-3" style="background-color: #82c7f9; color: #ebcd6d;">2000 points</span></p>
-            </div>
-
-            <!-- 3rd Place - Right -->
-            <div class="card shadow-sm p-3 text-center" style="width: 30%; height: 180px; border: 3px solid #708b7e;">
-                <h2>🥉 3ème place</h2>
-                <p style="color: #708b7e;">Nom Joueur - <span class="badge fs-5" style="background-color: #d35137; color: #ebcd6d;">1700 points</span></p>
-            </div>
-        </div>
-
-        <!-- Remaining places -->
-        <div class="row justify-content-center">
-            {% for place in range(4, 10) %}
-                <div class="col-12 col-md-6 col-lg-4 mb-3">
-                    <div class="card shadow-sm p-3 text-center" style="border: 2px solid #ebcd6d;">
-                        <h3>{{ place }}ème place</h3>
-                        <p style="color: #708b7e;">Nom Joueur - <span class="badge" style="background-color: #d35137; color: #ebcd6d;">{{ 1700 - place * 50 }} points</span></p>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-    </div>
+        {% for user in users[3:10] %}
+        <tr>
+          <td>{{ loop.index + 3 }}ème place</td>
+          <td>{{ user.username }}</td>
+          <td>{{ user.score }} points</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 </div>
 {% endblock %}
+</body>
