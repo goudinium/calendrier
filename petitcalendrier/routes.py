@@ -27,10 +27,10 @@ def day(day):
     if day < 1 or day > 24: 
         abort(404)
     question = Question.query.filter_by(day=day).first_or_404()
-    challenge = url_for('static', filename=f'images/cases/{question.image}')
+    challenge = url_for('static', filename=f'images/cases/{question.image}.png')
     answer = Answer.query.filter_by(question=question, author=current_user).first()
     today = get_todays_day()
-    if day == today: 
+    if day == today and answer == None: 
         form = AnswerForm()
         if form.validate_on_submit():
             answer = create_answer(form, question, current_user)
@@ -42,8 +42,9 @@ def day(day):
                 score +=1
             current_user.score = score
             db.session.commit()
-            return render_template("gift.j2", day=day, challenge=challenge, answer=answer, question=question, expired=True, score=score, today=today)
-        return render_template("gift.j2", day=day, form=form, challenge=challenge, answer=answer, question=question, expired=False, score=score, today=today)
+        return render_template("gift.j2", form=form, day=day, challenge=challenge, answer=answer, question=question, expired=False, score=score, today=today)
+    elif day == today and answer != None:
+        return render_template("gift.j2", day=day, challenge=challenge, answer=answer, question=question, expired=True, score=score, today=today)
     elif day < today: 
         return render_template("gift.j2", day=day, challenge=challenge, answer=answer, question=question, expired=True, score=score, today=today)
     elif day > today: 

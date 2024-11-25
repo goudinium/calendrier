@@ -1,5 +1,8 @@
 from petitcalendrier import app, db, bcrypt
 from petitcalendrier.models import User, Question
+import csv
+
+
 
 with app.app_context():
     db.drop_all()
@@ -11,8 +14,18 @@ with app.app_context():
     db.session.add(admin)
     db.session.commit()
 
-    for i in range(1, 25):
-        question = Question(day=i, image="singe.png", answer="Tiphaine", solution_time='mai', solution_place='brochant',
-                            solution_object='mp3', solution_sound='métro', solution_color="bleu")
-        db.session.add(question)    
-        db.session.commit()
+    # creating the questions
+    with open('questionnaire.csv', 'r') as file:
+        reader = csv.DictReader(file)
+        for line in reader:
+            day = line['jour'].strip()
+            image = line['image'].strip()
+            answer = line['personne'].strip()
+            time = line['periode'].strip()
+            object = line['objet'].strip()
+            place = line['lieu'].strip()
+            sound = line['bruit'].strip()
+            color = line['couleur'].strip()
+            q = Question(day=day, image=image, answer=answer, solution_time=time, solution_object=object, solution_place=place, solution_sound=sound, solution_color=color)
+            db.session.add(q)    
+            db.session.commit()
