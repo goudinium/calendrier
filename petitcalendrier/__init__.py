@@ -13,7 +13,7 @@ login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 login_manager.login_message_category = 'info'
 
-moch_day = 12
+moch_day = 23
 
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)

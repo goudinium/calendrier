@@ -14,14 +14,14 @@ class LoginForm(FlaskForm):
 class AnswerForm(FlaskForm):
     answer_character = SelectField("🙍 Quelle personne se cache derrière cette image?", choices=[
         ('Agathe', 'Agathe'), ('Alexandra', 'Alexandra'), ('Aziliz', 'Aziliz'),
-        ('Béatrice', 'Béatrice'), ('Céline', 'Céline'), ('Clotilde', 'Clotilde'),
-        ('Evan', 'Evan'), ('Galatée', 'Galatée'), ('Jacques', 'Jacques'), 
+        ('Beatrice', 'Béatrice'), ('Celine', 'Céline'), ('Clotilde', 'Clotilde'),
+        ('Evan', 'Evan'), ('Galatee', 'Galatée'), ('Jacques', 'Jacques'), 
         ('Jean-Louis', 'Jean-Louis'), ('Julie', 'Julie'), ('Julien', 'Julien'),
-        ('Laurence', 'Laurence'), ('Lenaïc', 'Lenaïc'), ('Loïc', 'Loïc'),
+        ('Laurence', 'Laurence'), ('Lenaic', 'Lenaïc'), ('Loic', 'Loïc'),
         ('Loren', 'Loren'), ('Oriane', 'Oriane'), ('Papy', 'Papy'), 
-        ('Quentin', 'Quentin'), ('Soraya', 'Soraya'), ('Stéphane', 'Stéphane'), 
-        ('Théophile', 'Théophile'), ('Tiphaine', 'Tiphaine'), ('Tristan', 'Tristan'), 
-        ('Valérie', 'Valérie')], validators=[DataRequired(True)])
+        ('Quentin', 'Quentin'), ('Soraya', 'Soraya'), ('Stephane', 'Stéphane'), 
+        ('Theophile', 'Théophile'), ('Tiphaine', 'Tiphaine'), ('Tristan', 'Tristan'), 
+        ('Valerie', 'Valérie')], validators=[DataRequired(True)])
     answer_time = StringField("📅 Quel est le moment caché?", validators=[DataRequired()])
     answer_place = StringField("🌍 Quel est le lieu caché?", validators=[DataRequired()])
     answer_color = StringField("🎨 Quelle est la couleur cachée?", validators=[DataRequired()])
