@@ -15,9 +15,6 @@ class User(db.Model, UserMixin):
     score = db.Column(db.Integer, unique=False, default=0)
     answers = db.relationship('Answer', backref='author', lazy=True)
 
-
-
-    
     def __repr__(self) -> str:
         return f"User('{self.username}', '{self.first_name} {self.last_name}', '{self.is_admin}')"
     

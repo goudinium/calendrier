@@ -5,3 +5,4 @@ bin/
 Scripts/
 __pycache__/
 pyvenv.cfg
+script.py
