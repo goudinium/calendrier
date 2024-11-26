@@ -10,7 +10,7 @@
     <div class="row">
     {% endif %}
         <div class="col-6 col-sm-4 col-md-2">
-    <a href="{{ url_for('day', day=day) }}">
+    <a href="{{ url_for('calendar.day', day=day) }}">
         {% if day in open_gifts %}
             {% if day == today %}
                 <img src="{{ url_for('static', filename='images/gifts/wait/cadeau_wait_' + day|string + '.png') }}" 
