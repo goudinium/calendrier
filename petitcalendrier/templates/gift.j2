@@ -14,7 +14,6 @@
                 <div class="card shadow-sm p-4 mb-4 border-0">
                     <h4 class="card-title mb-4 text-primary"> Ta réponse enregistrée </h4>
                     <p><strong>🙍 Personne 1 :</strong> {{ answer.answer_character }}</p> 
-                    <p><strong>🙍 Personne 2 :</strong> {{ answer.answer_character2 }}</p> 
                     <p><strong>📅 Moment :</strong> {{ answer.answer_time }}</p> 
                     <p><strong>🌍 Lieu :</strong> {{ answer.answer_place }}</p>
                     <p><strong>🔊 Bruit :</strong> {{ answer.answer_sound }}</p>
@@ -30,11 +29,6 @@
             <div class="col-6">
                 <p><strong>🙍 Personne 1: </strong>
                     <span style="color: {% if question.answer == answer.answer_character %} green {% else %} red; text-decoration: line-through; {% endif %};">
-                        {{ answer.answer_character }}
-                    </span>
-                </p>
-                <p><strong>🙍 Personne 2: </strong>
-                    <span style="color: {% if question.answer == answer.answer_character2 %} green {% else %} red; text-decoration: line-through; {% endif %};">
                         {{ answer.answer_character }}
                     </span>
                 </p>
@@ -90,6 +84,15 @@
                 {% endfor %}
             </select>
         </div>
+        <div class="input-group">
+            <select class="form-control form-control-lg border-primary w-100" name="{{ form.answer_character.name }}">
+                <option value="" {% if not form.answer_character.data %}selected{% endif %} disabled selected>Sélectionne un prénom</option>
+                {% for value, label in form.answer_character.choices %}
+                    <option value="{{ value }}" {% if form.answer_character.data == value %}selected{% endif %}>{{ label }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    
     {% endif %}
         </div>
 

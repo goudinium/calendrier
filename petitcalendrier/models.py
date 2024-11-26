@@ -39,7 +39,6 @@ class Question(db.Model):
 class Answer(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     answer_character = db.Column(db.String(20), unique=False, nullable=False)
-    answer_character2 = db.Column(db.String(20), unique=False, nullable=False)
     answer_time = db.Column(db.String(60), unique=False, nullable=False)
     answer_object = db.Column(db.String(60), unique=False, nullable=False)
     answer_place = db.Column(db.String(60), unique=False, nullable=False)
