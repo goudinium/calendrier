@@ -92,26 +92,6 @@ def register():
 
     return render_template("register.j2", form=form, title="Créer un utilisateur")
 
-@app.route("/users/update/<int:user_id>", methods=['GET', 'POST'])
-@login_required
-def update_user(user_id):
-    if not current_user.is_admin:
-        abort(403)
-    user = User.query.filter_by(id=user_id).first_or_404()
-    form = RegisterForm()
-    if form.validate_on_submit():
-        user.username = form.username.data
-        user.first_name = form.first_name.data
-        user.last_name = form.last_name.data
-        db.session.commit()
-        flash('Utilisateur modifié', 'success')
-        return url_for('users')
-    elif request.method == 'GET':
-        form.username.data = user.username
-        form.first_name.data = user.first_name
-        form.last_name.data = user.last_name
-    return render_template("register.j2", title=f"Modifier l'utilisateur {user.username}", form=form)
-
 
 @app.route("/users")
 @login_required
