@@ -52,7 +52,7 @@ def day(day):
     elif day < today and answer: 
         return render_template("old_gift_with_answer.j2", day=day, answer=answer, question=question, challenge=challenge)
     elif day < today and not answer:
-        return render_template("old_gift_without_answer.j2", day=day, challenge=challenge)
+        return render_template("old_gift_without_answer.j2", day=day, challenge=challenge, question=question)
     elif day > today: 
         return redirect(url_for('calendar.home'))
     
