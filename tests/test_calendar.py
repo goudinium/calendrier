@@ -50,3 +50,10 @@ def test_user_cannot_see_answer(client, auth):
         response = client.post("/day/10", data = answer, follow_redirects=True)
         assert "Ta réponse enregistrée" in response.data.decode()
         assert "answer-10" not in response.data.decode()
+
+def test_user_who_did_not_answer_can_see_answer(client, auth): 
+    auth.login()
+    with client:
+        response = client.get("/day/9", follow_redirects=True)
+        assert "Ta réponse enregistrée" not in response.data.decode()
+        assert "answer-9" in response.data.decode()
