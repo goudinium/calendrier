@@ -9,13 +9,11 @@ login_manager = LoginManager()
 login_manager.login_view = 'users.login'
 login_manager.login_message_category = 'info'
 
-moch_day = 21
-
 db = SQLAlchemy()
 bcrypt = Bcrypt()
 
 def get_todays_day():
-    return moch_day if current_app.debug else date.today().day 
+    return current_app.config["DAY"] if "DAY" in current_app.config else date.today().day 
 
 def create_app(config_class=Config):
     app = Flask(__name__)

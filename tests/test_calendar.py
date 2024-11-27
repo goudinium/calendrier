@@ -23,3 +23,4 @@ def test_user_cannot_access_days_after_24th_december(client, auth):
     auth.login()
     with client:
         assert client.get("/day/25", follow_redirects=True).status_code == 404
+
