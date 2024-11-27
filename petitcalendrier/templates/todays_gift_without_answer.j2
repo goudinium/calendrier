@@ -1,56 +1,13 @@
-<body style="background-color: f4e9db;">
-
 {% extends "layout.j2" %}
 {% block content %}
-<div class="container mt-5">
+<div class="container mt-5 brown-background">
     <div class="row justify-content-center align-items-center">
-      <h1 class="text-center mb-5"> Jour {{ day }} 🎁</h1>
-    <div class="col-12 col-md-6 col-lg-4 mb-5 text-center">
-        <img src="{{ challenge }}" class="img-fluid rounded shadow" alt="Challenge Image" />
-    </div>
-
-    {% if answer %}
-            <div class="col-12 col-md-6 col-lg-8">
-            <div class="card shadow-sm p-4 mb-4 border-0">
-                <h4 class="card-title mb-4 text-primary">Ta réponse enregistrée</h4>
-                <div class="row">
-                    <div class="col-6">
-                        <p><strong>🙍 Personne 1: </strong>
-                            <span style="color: {% if question.answer == answer.answer_character %} green {% else %} red; text-decoration: line-through; {% endif %};">
-                                {{ answer.answer_character }}
-                            </span>
-                        </p>
-                        <p><strong>📅 Moment :</strong> {{ answer.answer_time }}</p>
-                        <p><strong>🌍 Lieu :</strong> {{ answer.answer_place }}</p> 
-                        <p><strong>🔊 Bruit :</strong> {{ answer.answer_sound }}</p> 
-                        <p><strong>💎 Objet vintage :</strong> {{ answer.answer_object }}</p>
-                        <p><strong>🎨 Couleur :</strong> {{ answer.answer_color }}</p>
-                    </div>
-                    <div class="col-6"><span style="color: green;">
-                        <p>{{ question.answer }}</p>
-                        <p>{{ question.solution_time }}</p>
-                        <p>{{ question.solution_place }}</p> 
-                        <p>{{ question.solution_sound }}</p> 
-                        <p>{{ question.solution_object }}</p>
-                        <p>{{ question.solution_color }}</p>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>        
-    {% elif expired %}
-    <div class="col-12 col-md-6 col-lg-8">
-        <div class="card shadow-sm p-4 mb-4 border-0">
-            <h4 class="card-title mb-4 text-primary">😢 Pas de réponse enregistrée 😢</h4>
-            <p>Nous n'avons pas reçu de réponse de ta part pour ce jour-ci...
-                Alors nous on se casse la tête à te faire un calendrier de l'avent et c'est comme ça que tu nous remercies ??
-                Est-ce que tu sais au moins combien de lignes de code on a écrit nous en comparaison?? </p>
-            <p><strong>Tiphaine et François</strong></p>
+        <h1 class="text-center mb-5"> Jour {{ day }} 🎁</h1>
+        <div class="col-12 col-md-6 col-lg-4 mb-5 text-center">
+            <img src="{{ challenge }}" class="img-fluid rounded shadow" alt="Challenge Image" />
         </div>
-    </div>
-
-    {% else %}  
-    <form method="POST" class="form-horizontal">
+        
+        <form method="POST" class="form-horizontal">
         {{ form.hidden_tag() }}
         <div class="form-group mb-4">
             {{ form.answer_character.label(class="form-control-label text-secondary") }}
@@ -70,8 +27,9 @@
                     {% endfor %}
                 </select>
             </div>
+            {% endif %}
         </div>
-    {% endif %}
+
         
         <div class="form-group mb-4">
             {{ form.answer_time.label(class="form-control-label text-secondary") }}
@@ -151,9 +109,8 @@
 
 
     </form>
-        {% endif %}
+
     </div>
 </div>
+
 {% endblock content %}
-</body>
-   

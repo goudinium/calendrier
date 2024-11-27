@@ -45,11 +45,14 @@ def day(day):
                 score +=1
             current_user.score = score
             db.session.commit()
-        return render_template("gift.j2", form=form, day=day, challenge=challenge, answer=answer, question=question, expired=False, score=score, today=today)
+            return redirect(url_for("calendar.day", day=day))
+        return render_template("todays_gift_without_answer.j2", form=form, challenge=challenge, day=day)
     elif day == today and answer != None:
-        return render_template("gift.j2", day=day, challenge=challenge, answer=answer, question=question, expired=True, score=score, today=today)
-    elif day < today: 
-        return render_template("gift.j2", day=day, challenge=challenge, answer=answer, question=question, expired=True, score=score, today=today)
+        return render_template("todays_gift_with_answer.j2", day=day, challenge=challenge, answer=answer)
+    elif day < today and answer: 
+        return render_template("old_gift_with_answer.j2", day=day, answer=answer, question=question, challenge=challenge)
+    elif day < today and not answer:
+        return render_template("old_gift_without_answer.j2", day=day, challenge=challenge)
     elif day > today: 
         return redirect(url_for('calendar.home'))
     

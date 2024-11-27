@@ -1,0 +1,23 @@
+{# Gift #}
+
+{% extends "layout.j2" %}
+{% block content %}
+<div class="container mt-5 brown-background">
+    <div class="row justify-content-center align-items-center">
+        <h1 class="text-center mb-5"> Jour {{ day }} 🎁</h1>
+        <div class="col-12 col-md-6 col-lg-4 mb-5 text-center">
+            <img src="{{ challenge }}" class="img-fluid rounded shadow" alt="Challenge Image" />
+        </div>
+        <div class="col-12 col-md-6 col-lg-8">
+            <div class="card shadow-sm p-4 mb-4 border-0">
+                <h4 class="card-title mb-4 text-primary">😢 Pas de réponse enregistrée 😢</h4>
+                <p>Nous n'avons pas reçu de réponse de ta part pour ce jour-ci...
+                    Alors nous on se casse la tête à te faire un calendrier de l'avent et c'est comme ça que tu nous remercies ??
+                    Est-ce que tu sais au moins combien de lignes de code on a écrit nous en comparaison?? </p>
+                <p><strong>Tiphaine et François</strong></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
