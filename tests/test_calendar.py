@@ -24,3 +24,29 @@ def test_user_cannot_access_days_after_24th_december(client, auth):
     with client:
         assert client.get("/day/25", follow_redirects=True).status_code == 404
 
+def test_answer_is_submitted_correctly(client, auth):
+    auth.login()
+    with client:
+        answer = {"answer_character": "Agathe",
+                  "answer_time": "something",
+                  "answer_place": "something",
+                  "answer_sound": "something",
+                  "answer_object": "something",
+                  "answer_color": "something",
+                  "submit": "Valider"}
+        response = client.post("/day/10", data = answer, follow_redirects=True)
+        assert "Ta réponse enregistrée" in response.data.decode()
+
+def test_user_cannot_see_answer(client, auth):
+    auth.login()
+    with client:
+        answer = {"answer_character": "Agathe",
+                  "answer_time": "something",
+                  "answer_place": "something",
+                  "answer_sound": "something",
+                  "answer_object": "something",
+                  "answer_color": "something",
+                  "submit": "Valider"}
+        response = client.post("/day/10", data = answer, follow_redirects=True)
+        assert "Ta réponse enregistrée" in response.data.decode()
+        assert "answer-10" not in response.data.decode()
