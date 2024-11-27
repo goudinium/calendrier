@@ -12,7 +12,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg bg-body-tertiary" >
-<a class="navbar-brand" href="{{ url_for('home') }}">
+<a class="navbar-brand" href="{{ url_for('calendar.home') }}">
   <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Le Petit calendrier" style="width: 150px; height: auto;">
 </a>
   <div class="container-fluid">
@@ -23,13 +23,13 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         {% if current_user.is_authenticated %}
-        <a class="nav-link active" aria-current="page" href="{{ url_for('home') }}">
+        <a class="nav-link active" aria-current="page" href="{{ url_for('calendar.home') }}">
           <span class="ms-1" style="white-space: nowrap;">🎁 Calendrier      </span>
         </a>
-        <a class="nav-link active" aria-current="page" href="{{ url_for('score') }}">
+        <a class="nav-link active" aria-current="page" href="{{ url_for('calendar.score') }}">
           <span class="ms-1" style="white-space: nowrap;">🏆 Scores     </span>
         </a>
-        <a class="nav-link active" aria-current="page" href="{{ url_for('apropos') }}">
+        <a class="nav-link active" aria-current="page" href="{{ url_for('main.apropos') }}">
           <span class="ms-1" style="white-space: nowrap;">💬 A propos         </span>
         </a>
 
@@ -40,8 +40,8 @@
             Administration
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="{{ url_for('register') }}">Nouvel utilisateur</a></li>
-            <li><a class="dropdown-item" href="{{ url_for('users') }}">Liste des utilisateurs</a></li>
+            <li><a class="dropdown-item" href="{{ url_for('users.register') }}">Nouvel utilisateur</a></li>
+            <li><a class="dropdown-item" href="{{ url_for('users.users_list') }}">Liste des utilisateurs</a></li>
           </ul>
         </li> 
         {% endif %}
@@ -49,7 +49,7 @@
       <ul class="nav navbar-nav ms-auto w-100 justify-content-end">
         {% if current_user.is_authenticated %}
         <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('logout') }}">Déconnexion</a>
+          <a class="nav-link" href="{{ url_for('users.logout') }}">Déconnexion</a>
         </li>
         {% endif %}
       </ul>

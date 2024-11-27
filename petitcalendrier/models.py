@@ -15,9 +15,6 @@ class User(db.Model, UserMixin):
     score = db.Column(db.Integer, unique=False, default=0)
     answers = db.relationship('Answer', backref='author', lazy=True)
 
-
-
-    
     def __repr__(self) -> str:
         return f"User('{self.username}', '{self.first_name} {self.last_name}', '{self.is_admin}')"
     
@@ -39,7 +36,6 @@ class Question(db.Model):
 class Answer(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     answer_character = db.Column(db.String(20), unique=False, nullable=False)
-    answer_character2 = db.Column(db.String(20), unique=False, nullable=False)
     answer_time = db.Column(db.String(60), unique=False, nullable=False)
     answer_object = db.Column(db.String(60), unique=False, nullable=False)
     answer_place = db.Column(db.String(60), unique=False, nullable=False)

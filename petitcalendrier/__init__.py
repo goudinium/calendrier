@@ -1,19 +1,36 @@
-from flask import Flask
+from flask import Flask, current_app
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
+from datetime import date
+from petitcalendrier.config import Config
 
-
-app = Flask(__name__)
-app = Flask(__name__)
-app.config['SECRET_KEY'] = '74f98e76805cca74c37072e4f2e715af'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
-
-login_manager = LoginManager(app)
-login_manager.login_view = 'login'
+login_manager = LoginManager()
+login_manager.login_view = 'users.login'
 login_manager.login_message_category = 'info'
 
-db = SQLAlchemy(app)
-bcrypt = Bcrypt(app)
+moch_day = 21
 
-from petitcalendrier import routes
+db = SQLAlchemy()
+bcrypt = Bcrypt()
+
+def get_todays_day():
+    return moch_day if current_app.debug else date.today().day 
+
+def create_app(config_class=Config):
+    app = Flask(__name__)
+    app.config.from_object(config_class)
+
+    db.init_app(app)
+    login_manager.init_app(app)
+    bcrypt.init_app(app)
+
+    from petitcalendrier.calendar.routes import calendar
+    from petitcalendrier.users.routes import users
+    from petitcalendrier.main.routes import main
+
+    app.register_blueprint(calendar)
+    app.register_blueprint(users)
+    app.register_blueprint(main)
+
+    return app
