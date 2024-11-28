@@ -2,9 +2,8 @@
 {% block content %}
 <div class="calendar-body full-height">
     <div class="row">
-      <h1 class="text-center mb-5"> Bonjour {{ first_name }}, découvre la case du jour 🎁 </h1>
+      <h1 class="text-center mb-3"> Bonjour {{ first_name }}, découvre la case du jour 🎁 </h1>
     </div>
-      <h3 style="color: #708b7e;">Ton score: {{ current_user.score }}</h3>
     {% for day in days %}
     {% if loop.index0 % 6 == 0 %}
     <div class="row">

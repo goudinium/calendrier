@@ -29,9 +29,13 @@
         <a class="nav-link active" aria-current="page" href="{{ url_for('calendar.score') }}">
           <span class="ms-1" style="white-space: nowrap;">🏆 Scores     </span>
         </a>
-        <a class="nav-link active" aria-current="page" href="{{ url_for('main.apropos') }}">
-          <span class="ms-1" style="white-space: nowrap;">💬 A propos         </span>
+        <a class="nav-link active" aria-current="page" href="{{ url_for('main.faq') }}">
+          <span class="ms-1" style="white-space: nowrap;">❓ FAQ         </span>
         </a>
+        <a class="nav-link active" aria-current="page" href="{{ url_for('main.apropos') }}">
+          <span class="ms-1" style="white-space: nowrap;">🤝 L'équipe        </span>
+        </a>
+        
 
         {%endif%}
         {% if current_user.is_admin %}

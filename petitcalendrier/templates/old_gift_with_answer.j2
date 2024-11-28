@@ -10,31 +10,33 @@
     </div>
     <div class="col-12 col-md-6 col-lg-8">
         <div class="card shadow-sm p-4 mb-4 border-0">
-            <h4 class="card-title mb-4 text-primary">Ta réponse enregistrée</h4>
-            <div class="row">
-                <div class="col-6">
-                    <p> 
-                        <strong>🙍 Personne: </strong>
-                        <span style="color: {% if question.answer == answer.answer_character %} green {% else %} red; text-decoration: line-through; {% endif %};">
+           <div class="row">
+            <!-- Première colonne -->
+            <div class="col-12 col-md-6">
+            <h3 class="card-title mb-4 text-primary">Ta réponse enregistrée</h3>
+            <p><strong>🙍 Personne: </strong>
+            <span style="color: {% if question.answer == answer.answer_character %} green {% else %} red; text-decoration: line-through; {% endif %};">
                             {{ answer.answer_character }}
-                        </span>
-                    </p>
-                    <p><strong>📅 Moment :</strong> {{ answer.answer_time }}</p>
-                    <p><strong>🌍 Lieu :</strong> {{ answer.answer_place }}</p> 
-                    <p><strong>🔊 Bruit :</strong> {{ answer.answer_sound }}</p> 
-                    <p><strong>💎 Objet vintage :</strong> {{ answer.answer_object }}</p>
-                    <p><strong>🎨 Couleur :</strong> {{ answer.answer_color }}</p>
-                </div>
-                <div class="col-6"><span style="color: green;">
-                    <p>{{ question.answer }}</p>
-                    <p>{{ question.solution_time }}</p>
-                    <p>{{ question.solution_place }}</p> 
-                    <p>{{ question.solution_sound }}</p> 
-                    <p>{{ question.solution_object }}</p>
-                    <p>{{ question.solution_color }}</p>
-                    </span>
-                </div>
+            </span>
+            </p>
+            <p><strong>📅 Moment :</strong> {{ answer.answer_time }}</p>
+            <p><strong>🌍 Lieu :</strong> {{ answer.answer_place }}</p>
+            <p><strong>🔊 Bruit :</strong> {{ answer.answer_sound }}</p>
+            <p><strong>💎 Objet vintage :</strong> {{ answer.answer_object }}</p>
+            <p><strong>🎨 Couleur :</strong> {{ answer.answer_color }}</p>
+            </div>
+
+            <!-- Deuxième colonne -->
+            <div class="col-12 col-md-6 bonne-reponse">
+                <h3 class="card-title mb-4 text-primary">La bonne réponse </h3>
+                <p>{{ question.answer }}</p>
+                <p>{{ question.solution_time }}</p>
+                <p>{{ question.solution_place }}</p>
+                <p>{{ question.solution_sound }}</p>
+                <p>{{ question.solution_object }}</p>
+                <p>{{ question.solution_color }}</p>
             </div>
         </div>
-    </div> 
+    </div>
+</div> 
 {% endblock content %}

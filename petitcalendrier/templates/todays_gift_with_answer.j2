@@ -27,5 +27,9 @@
                 </div>
             </div>
         </div>
+    En atttendant la solution du jour, tu peux consulter celle d'hier 
+    <a class="btn btn-secondary" href="{{ url_for('calendar.day', day=day_before) }}">
+            Solution du jour {{ day_before}}
+    </a>
     </div> 
 {% endblock content %}

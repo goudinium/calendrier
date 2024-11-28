@@ -1,36 +1,57 @@
-{# Gift #}
-
 {% extends "layout.j2" %}
+
 {% block content %}
 <div class="container mt-5 brown-background">
     <div class="row justify-content-center align-items-center">
-        <h1 class="text-center mb-5"> Jour {{ day }} 🎁</h1>
+        
+        <!-- Titre principal -->
+        <h1 class="text-center mb-5">Jour {{ day }} 🎁</h1>
+
         <div class="col-12 col-md-6 col-lg-4 mb-5 text-center">
             <img src="{{ challenge }}" class="img-fluid rounded shadow" alt="Challenge Image" />
         </div>
+
         <div class="col-12 col-md-6 col-lg-8">
             <div class="card shadow-sm p-4 mb-4 border-0">
-                <h4 class="card-title mb-4 text-primary">😢 Pas de réponse enregistrée 😢</h4>
-                <p>Nous n'avons pas reçu de réponse de ta part pour ce jour-ci...
-                    Alors nous on se casse la tête à te faire un calendrier de l'avent et c'est comme ça que tu nous remercies ??
-                    Est-ce que tu sais au moins combien de lignes de code on a écrit nous en comparaison?? </p>
-                <p><strong>Tiphaine et François</strong></p>
-                <strong>Bon on est sympas, on te donne quand même les bonnes réponses</strong>
-                <div class="col-6"><span style="color: green;"></span>
-                    <div class="col-6"><span style="color: green;">
-                    </span>
-                        {{ question.answer }}
-                        {{ question.solution_time }}
-                        {{ question.solution_place }}
-                        {{ question.solution_sound }}
-                        {{ question.solution_object }}
-                        {{ question.solution_color }}
-                    </span>
+
+                <!-- "Grognon" -->
+                <div class="mb-4">
+                    <h4 class="card-title mb-2 text-primary text-center">😢 Pas de réponse enregistrée 😢</h4>
+                    <p>
+                        Nous n'avons pas reçu de réponse de ta part pour ce jour-ci...
+                        Alors nous, on se casse la tête à te faire un calendrier de l'avent et c'est comme ça que tu nous remercies ??
+                        Est-ce que tu sais au moins combien de lignes de code on a écrites en comparaison ?? 
+                    </p>
+                    <p class="text-center"><strong>Titi & Fanfan</strong></p>
+                </div>
+
+                <!-- Section "Bonne réponse" -->
+                <div>
+                    <h5 class="card-title mb-1 text-primary">La bonne réponse</h5>
+                    <p class="mb-3">On est gentils, alors voici quand même la bonne réponse :) </p> 
+
+                    <div class="mb-2">
+                        <p><strong>🙍 Personne:</strong> <span class="bonne-reponse">{{ question.answer }}</span></p>
                     </div>
-                </div>      
+                    <div class="mb-2">
+                        <p><strong>📅 Moment :</strong> <span class="bonne-reponse">{{ question.solution_time }}</span></p>
+                    </div>
+                    <div class="mb-2">
+                        <p><strong>🌍 Lieu :</strong> <span class="bonne-reponse">{{ question.solution_place }}</span></p>
+                    </div>
+                    <div class="mb-2">
+                        <p><strong>🔊 Bruit :</strong> <span class="bonne-reponse">{{ question.solution_sound }}</span></p>
+                    </div>
+                    <div class="mb-2">
+                        <p><strong>💎 Objet vintage :</strong> <span class="bonne-reponse">{{ question.solution_object }}</span></p>
+                    </div>
+                    <div class="mb-2">
+                        <p><strong>🎨 Couleur :</strong> <span class="bonne-reponse">{{ question.solution_color }}</span></p>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
 </div>
-
 {% endblock content %}
