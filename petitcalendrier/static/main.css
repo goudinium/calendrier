@@ -228,3 +228,8 @@ input[type="text"], input[type="password"] {
 .fs-10 {
   font-size: 0.4rem;
 }
+
+.custom-text p {
+  margin: 0;
+  line-height: 1.4;
+}
