@@ -1,19 +1,20 @@
 <body style="background-color: #f4e9db;">
 {% extends "layout.j2" %}
 {% block content %}
-<div class="container py-5">
+<div class="container py-5 brown-background">
   <h1 class="text-center mb-5"> Les scores 🏆</h1>
   <div class="row justify-content-center mb-4">
     <div class="row justify-content-center mb-4">
     <div class="card p-4 shadow-sm text-center" style="max-width: 400px; border: 1px solid #ebcd6d; background-color: #fff;">
       <h3 style="color: #708b7e;">Ton score: {{ current_user.score }}</h3>
-      <h5 class="mt-3" style="color: #d35137;">Ta position : {{ users.index(current_user) + 1 }}ème place</h5>
+<h5 class="mt-3" style="color: #d35137;">Ta position : {{ users.index(current_user) + 1 }}{% if users.index(current_user) + 1 == 1 %}ère{% else %}ème{% endif %} place</h5>
     </div>
   </div>
   </div>
-
-  <h1 class="text-center mb-4" style="color: #ebcd6d;">Classement Général</h1>
-  <div class="table-responsive">
+  <div class="card-header text-primary">
+        <h3 class="card-title mb-0"><span class="fas fa-paper-plane"></span> Classement Général</h3>
+      </div>
+  <div class="card-body">
     <table class="table table-bordered text-center">
       <thead style="background-color: #82c7f9; color: #f4e9db;">
         <tr>
@@ -27,7 +28,7 @@
         <tr style="background-color: #d35137; color: #f4e9db;">
           <td>🥇 1ère place</td>
           <td>{{ users[0].username }}</td>
-          <td>{{ users[0].score }} points</td>
+          <td>{{ users[0].score }} point{% if users[0].score != 1 and users[0].score != 0 %}s{% endif %}</td>
         </tr>
         {% endif %}
         {% if users|length >= 2 %}

@@ -1,8 +1,8 @@
-from petitcalendrier import app, db, bcrypt
+from petitcalendrier import create_app, db, bcrypt
 from petitcalendrier.models import User, Question
 import csv
 
-
+app = create_app()
 
 with app.app_context():
     db.drop_all()
