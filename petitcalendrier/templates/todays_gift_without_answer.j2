@@ -19,26 +19,6 @@
                     {% endfor %}
                 </div>
             {% else %}
-<<<<<<< HEAD:petitcalendrier/templates/gift.j2
-        <div class="input-group">
-            <select class="form-control form-control-lg border-primary w-100" name="{{ form.answer_character.name }}">
-                <option value="" {% if not form.answer_character.data %}selected{% endif %} disabled selected>Sélectionne un prénom</option>
-                {% for value, label in form.answer_character.choices %}
-                    <option value="{{ value }}" {% if form.answer_character.data == value %}selected{% endif %}>{{ label }}</option>
-                {% endfor %}
-            </select>
-        </div>
-        <div class="input-group">
-            <select class="form-control form-control-lg border-primary w-100" name="{{ form.answer_character.name }}">
-                <option value="" {% if not form.answer_character.data %}selected{% endif %} disabled selected>Sélectionne un prénom</option>
-                {% for value, label in form.answer_character.choices %}
-                    <option value="{{ value }}" {% if form.answer_character.data == value %}selected{% endif %}>{{ label }}</option>
-                {% endfor %}
-            </select>
-        </div>
-    
-    {% endif %}
-=======
             <div class="input-group">
                 <select class="form-control form-control-lg border-primary w-100" name="{{ form.answer_character.name }}">
                     <option value="" {% if not form.answer_character.data %}selected{% endif %} disabled selected>Sélectionne un prénom</option>
@@ -48,7 +28,6 @@
                 </select>
             </div>
             {% endif %}
->>>>>>> ac7cb19560386d639374eb378880c0df556f55d2:petitcalendrier/templates/todays_gift_without_answer.j2
         </div>
 
         
