@@ -1,0 +1,87 @@
+{% extends "layout.j2" %}
+
+{% block content %}
+<div class="container py-5 brown-background">
+  <h1 class="text-center mb-5">Foire Aux Questions ❓ </h1>
+  
+  <!-- Envoi des réponses -->
+  <div class="mb-5">
+    <div class="card shadow-sm border-0">
+      <div class=" text-primary mt-3 mb-3 text-center">
+        <h3 class="card-title mb-0"><span class="fas fa-paper-plane"></span> ✉️ Envoi et consultation des réponses </h3>
+      </div>
+      <div class="card-body">
+        <ul>
+        <li><h5><strong>Je comprends rien. Faut faire quoi ? </h5></strong>
+        <p>Ok je reprends tout !! Mais sois attentif cette fois ;) 
+        <p>Tu as rempli un formulaire en répondant aux questions suivantes selon tes goûts et expériences : </br>
+            <div class="text-center">
+            📅 Un moment </br>
+            🌍 Un lieu </br>
+            🔊 Un bruit </br>
+            💎 Un objet vintage </br>
+            🎨 Une couleur  </br>
+            <p>
+            </div>
+            <p></p>
+              À partir de ces informations, et avec l’aide de ChatGPT, une image a été créée pour vous représenter 
+              (ou du moins essayer de refléter un peu votre personnalité !).
+              Chaque jour, tu découvriras les images de chacun. <b>Le défi : deviner qui se cache derrière l'image 
+              et quels étaient les éléments associés !</b> Chaque jour, clique sur un nouveau cadeau <a href="{{ url_for('calendar.home') }}" >ICI</a>, découvre une image et trouve à qui elle appartient !
+            </p>          
+          <li><h5><strong>Est-ce que je peux modifier ma réponse ?</h5></strong>
+            <p>Non, une fois envoyée, ta réponse ne peut plus être modifiée. Il y a un message de confirmation avant l’envoi, tu ne devrais pas faire l’erreur deux fois ;)</p>
+          </li>
+          <li><h5><strong>Quand est-ce que j’aurais accès à la solution du jour ?</h5></strong>
+            <p>Pour éviter toute triche, la bonne réponse ne sera dévoilée uniquement le lendemain ! "La patience est amère, mais son fruit est doux." a dit JJ Rousseau</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Consultation des réponses et scores -->
+  <div class="mb-5">
+    <div class="card shadow-sm border-0">
+      <div class=" text-success mt-3 mb-3 text-center">
+        <h3 class="card-title mb-0"><span class="fas fa-trophy"></span> 🏆 Scores</h3>
+      </div>
+      <div class="card-body">
+        <ul>
+          <li><h5><strong>Comment est calculé le score ?</h5></strong>
+          <div class="custom-text">
+              <p>Le score que tu vois dans <a href="{{ url_for('calendar.score') }}" >l’onglet “Score”</a> est calculé en fonction de ta réponse chaque jour:</p>
+              <p>+0 si tu n’as pas répondu</p>
+              <p>+2 si tu as répondu mais que tu n’as pas trouvé la bonne personne</p>
+              <p>+7 si tu as répondu et que tu as trouvé la bonne personne</p>
+          </div>
+          <p></br>Le score ne prend donc pas en compte vos réponses données pour le lieu, le moment, l’objet, le bruit et la couleur. En effet, vos réponses exactes à ces questions ne sont pas devinables (oui vous avez écrit des bêtises) et donc nécessitera une intervention humaine (ou plus précisément Tiphainienne) pour vérifier: Un 2ème classement sera donc annoncé le 25 décembre :)
+          </p>
+          </li>
+          <li><h5><strong>S’il y a égalité, comment ça se passe ?</h5></strong>
+            <p>En cas d’égalité, le plus jeune passe devant. Et pour les paires de jumelles, ça se passe par ordre alphabétique (Désolée Oriane, Auriane aurait été plus avantageux ;))</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Problèmes techniques -->
+  <div class="mb-5">
+    <div class="card shadow-sm border-0">
+      <div class=" text-warning mt-3 mb-3 text-center">
+        <h3 class="card-title mb-0"><span class="fas fa-cogs"></span> ⚙️ Problèmes techniques</h3>
+      </div>
+      <div class="card-body">
+        <ul>
+          <li><h5><strong>J’ai oublié mon mot de passe. Que faire?</h5></strong>
+            <p>Bon j'imagine que c’est pas toi qui a oublié ton mdp sinon tu serais pas là. Tout simple: tu relis le mail de connexion que Tiphaine t’a envoyé le 1er décembre. Et puis si t’es vraiment désespéré.e, contacte-la ;)</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+{% endblock %}

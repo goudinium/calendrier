@@ -10,7 +10,7 @@
     <title>Le Petit calendrier</title>
     {% endif %}
 </head>
-<body>
+<body class="brown-background">
 <nav class="navbar navbar-expand-lg bg-body-tertiary" >
 <a class="navbar-brand" href="{{ url_for('calendar.home') }}">
   <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Le Petit calendrier" style="width: 150px; height: auto;">
@@ -29,9 +29,13 @@
         <a class="nav-link active" aria-current="page" href="{{ url_for('calendar.score') }}">
           <span class="ms-1" style="white-space: nowrap;">🏆 Scores     </span>
         </a>
-        <a class="nav-link active" aria-current="page" href="{{ url_for('main.apropos') }}">
-          <span class="ms-1" style="white-space: nowrap;">💬 A propos         </span>
+        <a class="nav-link active" aria-current="page" href="{{ url_for('main.faq') }}">
+          <span class="ms-1" style="white-space: nowrap;">❓ FAQ         </span>
         </a>
+        <a class="nav-link active" aria-current="page" href="{{ url_for('main.apropos') }}">
+          <span class="ms-1" style="white-space: nowrap;">🤝 L'équipe        </span>
+        </a>
+        
 
         {%endif%}
         {% if current_user.is_admin %}

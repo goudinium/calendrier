@@ -1,0 +1,37 @@
+{# Gift #}
+
+{% extends "layout.j2" %}
+{% block content %}
+<div class="container mt-5 brown-background">
+    <div class="row justify-content-center align-items-center">
+      <h1 class="text-center mb-5"> Jour {{ day }} 🎁</h1>
+    <div class="col-12 col-md-6 col-lg-4 mb-5 text-center">
+        <img src="{{ challenge }}" class="img-fluid rounded shadow" alt="Challenge Image" />
+    </div>
+    <div class="col-12 col-md-6 col-lg-8">
+        <div class="card shadow-sm p-4 mb-4 border-0">
+            <h4 class="card-title mb-4 text-primary">Ta réponse enregistrée</h4>
+            <div class="row">
+                <div class="col-6">
+                    <p> 
+                        <strong>🙍 Personne: </strong>
+                        <span>
+                            {{ answer.answer_character }}
+                        </span>
+                    </p>
+                    <p><strong>📅 Moment :</strong> {{ answer.answer_time }}</p>
+                    <p><strong>🌍 Lieu :</strong> {{ answer.answer_place }}</p> 
+                    <p><strong>🔊 Bruit :</strong> {{ answer.answer_sound }}</p> 
+                    <p><strong>💎 Objet vintage :</strong> {{ answer.answer_object }}</p>
+                    <p><strong>🎨 Couleur :</strong> {{ answer.answer_color }}</p>
+                </div>
+            </div>
+        </div>
+    {% if day > 1 %}
+    En attendant la solution du jour, tu peux consulter celle d'hier 
+    <a class="btn btn-secondary" href="{{ url_for('calendar.day', day=day_before) }}">
+        Solution du jour {{ day_before }}
+    </a>
+    {% endif %}
+    </div> 
+{% endblock content %}

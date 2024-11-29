@@ -13,7 +13,7 @@ calendar = Blueprint('calendar', __name__)
 @login_required
 def home():
     today = get_todays_day()
-    days = [14, 10, 11, 8, 22, 18, 21, 23, 16, 13, 5, 17, 3, 1, 9, 6, 7, 24, 12, 19, 15, 20, 2, 4]
+    days = [12, 8, 7, 5, 11, 24, 20, 1, 23, 13, 6, 19, 15, 4, 2, 18, 10, 22, 9, 21, 3, 16, 17, 14]
     open_gifts = {day for day in range(1, today)}
     todays_question = Question.query.filter_by(day=today).first()
     score = current_user.score
@@ -45,11 +45,14 @@ def day(day):
                 score +=1
             current_user.score = score
             db.session.commit()
-        return render_template("gift.j2", form=form, day=day, challenge=challenge, answer=answer, question=question, expired=False, score=score, today=today)
+            return redirect(url_for("calendar.day", day=day))
+        return render_template("todays_gift_without_answer.j2", form=form, challenge=challenge, day=day)
     elif day == today and answer != None:
-        return render_template("gift.j2", day=day, challenge=challenge, answer=answer, question=question, expired=True, score=score, today=today)
-    elif day < today: 
-        return render_template("gift.j2", day=day, challenge=challenge, answer=answer, question=question, expired=True, score=score, today=today)
+        return render_template("todays_gift_with_answer.j2", day=day, challenge=challenge, answer=answer, day_before=day-1)
+    elif day < today and answer: 
+        return render_template("old_gift_with_answer.j2", day=day, answer=answer, question=question, challenge=challenge)
+    elif day < today and not answer:
+        return render_template("old_gift_without_answer.j2", day=day, challenge=challenge, question=question)
     elif day > today: 
         return redirect(url_for('calendar.home'))
     

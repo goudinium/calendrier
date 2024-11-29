@@ -62,7 +62,12 @@ input[type="text"], input[type="password"] {
     text-align: center;
     margin: 0;
     padding-top: 10vh;
-  }
+}
+
+
+.brown-background {
+  background-color: #f4e9db;
+}
   
 .calendar-body > h1 {
     color: #333;
@@ -188,5 +193,43 @@ input[type="text"], input[type="password"] {
   height: 120px; /* Taille de l'image */
   object-fit: cover; /* Pour s'assurer que l'image est bien recadrée en forme ronde */
 }
-  
-  
+
+
+.bonne-reponse {
+  color: green; 
+}
+
+.btn-secondary {
+  background-color: #0d6efd;
+  border-color: #0d6efd;    
+  box-shadow: none;          
+}
+
+.btn-secondary:hover {
+  background-color: #0d6efd;  /* Bleu au survol */
+  border-color: #0d6efd;
+}
+
+/* État actif (lorsque le bouton est cliqué) */
+.btn-secondary:active {
+  background-color:#0d6efd;  /* Rouge au clic */
+  border-color: #0d6efd;
+}
+
+.fs-7 {
+  font-size: 0.7rem; 
+}
+.fs-8 {
+  font-size: 0.6rem; 
+}
+.fs-9 {
+  font-size: 0.5rem; 
+}
+.fs-10 {
+  font-size: 0.4rem;
+}
+
+.custom-text p {
+  margin: 0;
+  line-height: 1.4;
+}
