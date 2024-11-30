@@ -40,9 +40,9 @@ def day(day):
             db.session.add(answer)
             db.session.commit()
             if (answer.answer_character == question.answer): 
-                score+=20 
+                score+=7 
             else:
-                score +=1
+                score +=2
             current_user.score = score
             db.session.commit()
             return redirect(url_for("calendar.day", day=day))

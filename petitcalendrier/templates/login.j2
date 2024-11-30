@@ -1,8 +1,8 @@
 {% extends "layout.j2" %}
 {% block content %}
     <div class="login d-flex align-items-center justify-content-center">
-    <form class="col-lg-6 offset-lg-3" method="POST" >
-        <div class="row justify-content-center">
+    <form class="row col-lg-6 offset-lg-3 col-sm-4 col-md-2" method="POST" >
+        <div class=" col-xs-1 center-block">
             {{ form.hidden_tag() }}
             <div class="form-group">
                 {{ form.username.label(class="form-control-label badge text-bg-primary text-wrap") }}
