@@ -1,5 +1,6 @@
 from petitcalendrier import create_app, db, bcrypt
 from petitcalendrier.models import User, Question
+from petitcalendrier import Config
 import csv
 
 app = create_app()
@@ -8,7 +9,7 @@ with app.app_context():
     db.drop_all()
     db.create_all()
 
-    pwd = bcrypt.generate_password_hash("fanfan").decode('utf-8')
+    pwd = bcrypt.generate_password_hash(Config.ADMIN_PASSWORD).decode('utf-8')
     admin = User(username='admin', first_name="François", last_name="Goudineau", password=pwd, is_admin=True)
 
     db.session.add(admin)
