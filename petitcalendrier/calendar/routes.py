@@ -1,6 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for, abort
 from flask_login import current_user, login_required
-from sqlalchemy.orm import aliased
 
 from petitcalendrier import get_todays_day, db
 from petitcalendrier.models import Question, Answer, User
