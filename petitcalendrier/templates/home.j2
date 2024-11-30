@@ -2,13 +2,13 @@
 {% block content %}
 <div class="calendar-body full-height">
     <div class="row">
-      <h1 class="text-center mb-3"> Bonjour {{ first_name }}, découvre la case du jour 🎁 </h1>
+      <h1 class="text-center "> Bonjour {{ first_name }}, découvre la case du jour 🎁 </h1>
     </div>
     {% for day in days %}
     {% if loop.index0 % 6 == 0 %}
     <div class="row">
     {% endif %}
-        <div class="col-6 col-sm-4 col-md-2">
+    <div class="col-6 col-sm-4 col-md-2">
     <a href="{{ url_for('calendar.day', day=day) }}">
         {% if day in open_gifts %}
             {% if day == today %}
