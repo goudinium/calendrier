@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, abort
 from flask_login import current_user, login_required
+from sqlalchemy.orm import aliased
 
 from petitcalendrier import get_todays_day, db
 from petitcalendrier.models import Question, Answer, User
@@ -61,4 +62,23 @@ def day(day):
 def score():
     users = User.query.order_by(User.score.desc()).all()  
     return render_template("score.j2", users=users)
-        
+
+@calendar.route("/answers")
+@login_required
+def answers():
+    if not current_user.is_admin:
+        abort(403)
+    return render_template("answers.j2")
+
+@calendar.route("/answers/<int:day>")
+@login_required
+def answers_by_day(day):
+    if not current_user.is_admin:
+        abort(403) 
+    question = Question.query.filter_by(day=day).first_or_404()
+    answers = question.answers
+    userids_to_users = {}
+    users = User.query.all()
+    for user in users:
+        userids_to_users[user.id] = user.username
+    return render_template("answers_by_day.j2", answers=answers, userids_to_users=userids_to_users, day=day)

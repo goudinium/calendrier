@@ -46,7 +46,7 @@ def check_answers(user_id):
         abort(403)
     user = User.query.filter_by(id=user_id).first_or_404()
     answers = user.answers
-    return render_template("answers.j2", user=user, answers=answers)
+    return render_template("answers_by_user.j2", user=user, answers=answers)
 
 
 @users.route("/logout")
