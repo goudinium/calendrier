@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, redirect, url_for, abort, request,
 from flask_login import current_user, login_required, login_user, logout_user
 
 from petitcalendrier.users.forms import RegisterForm, LoginForm
-from petitcalendrier.models import User
+from petitcalendrier.models import User, Answer
 from petitcalendrier import bcrypt, db 
 
 users = Blueprint('users', __name__)
@@ -38,6 +38,15 @@ def register():
         return redirect(url_for("users.register"))
 
     return render_template("register.j2", form=form, title="Créer un utilisateur")
+
+@users.route("/users/<int:user_id>")
+@login_required
+def check_answers(user_id):
+    if not current_user.is_admin:
+        abort(403)
+    user = User.query.filter_by(id=user_id).first_or_404()
+    answers = user.answers
+    return render_template("answers.j2", user=user, answers=answers)
 
 
 @users.route("/logout")
