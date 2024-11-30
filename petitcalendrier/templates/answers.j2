@@ -1,0 +1,26 @@
+{% extends "layout.j2" %}
+{% block content %}
+<div class="row text-center">
+    <h1>Vérifier les réponses pour chaque jour</h1>
+</div>
+
+<div class="container content-section d-flex align-items-center justify-content-center">
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Jour</th>
+      <th scope="col">Réponses</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for day in range(1,25) %}
+      <tr>
+        <th>{{day}}</th>
+        <td><a class="btn btn-primary" href="{{url_for('calendar.answers_by_day', day=day)}}" role="button">Réponses</a></td>
+      </tr>
+    {% endfor %}
+  </tbody>
+  </table>
+</div>
+
+{% endblock content %}
