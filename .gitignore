@@ -6,3 +6,5 @@ Scripts/
 __pycache__/
 pyvenv.cfg
 script.py
+users.csv
+Users.csv
